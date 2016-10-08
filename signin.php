@@ -1,7 +1,19 @@
 <?php
     if($_POST){
-        if(isset($_POST['username']) && isset($_POST['email'])&&isset($_POST['password'])&&isset($_POST['passwordAgain'])){
+        if(isset($_POST['username']) && isset($_POST['email'])&&isset($_POST['password'])){
+            $username=$_POST['username'];
+            $email=$_POST['email'];
+            $password=$_POST['password'];
+
             require_once __DIR__ . '/db/db_connect.php';
+            $db=new DB_CONNECT(); //DATABASE BAGLANTISI
+            $result=mysql_query("INSERT INTO users(username, email, password) VALUES ('$username', '$email', '$password')");
+
+            if($result){
+                header("Location: index.php");
+                die();
+            }else
+                echo("error.");
         }
         else{
             echo("Missing fields.");
