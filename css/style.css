@@ -11,6 +11,10 @@ body{
     list-style: none;
     display: inline;
 }
-.authForm{
+.authForm {
     background-color: lightgray;
+
+}
+#logo{
+    text-align: left;
 }
