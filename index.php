@@ -46,12 +46,12 @@
         }
         else{
             echo "
-            <h1 id = \'logo\' > Pinti.com</h1 >
+            <h1 id = 'logo' > Pinti.com</h1 >
             <ul >
-                <li>Hoşgeldin $username.</li>
-                <li ><a href = 'logout.php' > Çıkış yap </a ></li >
+                <li><label>Hoşgeldin <a href='profile.php'>$username</a>.</label></li>
                 <li ><a href = '' > Ürün Sat </a ></li >
                 <li ><a href = 'help.php' > Yardım</a ></li >
+                 <li ><a href = 'logout.php' > Çıkış yap </a ></li >
             </ul >
             " ;
         }

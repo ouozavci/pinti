@@ -32,25 +32,30 @@
 <body>
 <div class="authForm">
 <form name=frm method="post">
+
     <table>
         <tr>
-            <td>E-posta adresiniz:</td>
-            <td><input type="email" name="email" id="txtEmail"></td>
+            <td colspan="2"><h1 class="authBaslik">Kayıt Ol</h1></td>
+        </tr>
+
+        <tr>
+            <td><label>E-posta adresiniz:</label></td>
+            <td><input class="txtBox" type="email" name="email" id="txtEmail" placeholder="e-mail"></td>
         </tr>
         <tr>
-            <td>Kullanıcı adınız:</td>
-            <td><input type="text" name="username" id="txtUsername"></td>
+            <td><label>Kullanıcı adınız:</label></td>
+            <td><input class="txtBox" type="text" name="username" id="txtUsername" placeholder="username"></td>
         </tr>
         <tr>
-            <td>Şifreniz:</td>
-            <td><input type="password" name="password" id="txtPassword"></td>
+            <td><label>Şifreniz:</label></td>
+            <td><input class="txtBox" type="password" name="password" id="txtPassword" placeholder="password"></td>
         </tr>
         <tr>
-            <td>Şifreniz (Tekrar):</td>
-            <td><input type="password" name="passwordAgain" id="txtPasswordAgain"></td>
+            <td><label>Şifreniz (Tekrar):</label></td>
+            <td><input class="txtBox" type="password" name="passwordAgain" id="txtPasswordAgain" placeholder="password (Again)"></td>
         </tr>
         <tr>
-            <td><a href="index.php">Anasayfaya Dön</a></td>
+            <td><a href="index.php"><label>Anasayfaya Dön</label></a></td>
             <td><input type="button" name="btnSignin" value="Kayıt Ol" onClick="checkform();"></td>
         </tr>
     </table>

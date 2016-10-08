@@ -40,18 +40,19 @@
     </head>
     <body>
     <div class="authForm">
-        <form method="post">
+        <form method="post" id="loginForm">
+            <h1 class="authBaslik">Giriş Yap</h1>
             <table>
                 <tr>
-                    <td>E-posta adresiniz:</td>
-                    <td><input type="email" name="email"></td>
+                    <td><label>E-posta adresiniz:</label></td>
+                    <td><input class="txtBox" type="email" name="email" placeholder="e-mail" </td>
                 </tr>
                 <tr>
-                    <td>Şifreniz:</td>
-                    <td><input type="password" name="password"></td>
+                    <td><label>Şifreniz:</label></td>
+                    <td><input class="txtBox" type="password" name="password" placeholder="password"></td>
                 </tr>
                 <tr>
-                    <td><a href="forgotPassword.php">Şifremi unuttum.</a></td>
+                    <td><a href="forgotPassword.php"><label>Şifremi unuttum.</label></a></td>
                     <td><input type="submit" name="btnLogin" value="Giriş Yap"></td>
                 </tr>
             </table>
