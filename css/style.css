@@ -11,3 +11,7 @@ body{
     list-style: none;
     display: inline;
 }
+
+#logo{
+    text-align: left;
+}

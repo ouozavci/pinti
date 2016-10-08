@@ -7,8 +7,8 @@
 </head>
 <body>
 <div id="header">
+    <h1 id="logo">Pinti.com</h1>
     <ul>
-        <li>LOGO</li>
         <li><a href="signin.php">Kayıt ol</a></li>
         <li><a href="login.php">Giriş yap</a></li>
         <li><a href="">Ürün Sat</a></li>
