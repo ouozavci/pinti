@@ -9,6 +9,6 @@
 </head>
 <body>
 	<h1>pinti.com</h1>
-	<p>pinti.com en ucuz fiyatlarla yakında hizmetinizde</p>
+	<p>pinti.com en ucuz fiyatlarla çok yakında hizmetinizde</p>
 </body>
 </html>
