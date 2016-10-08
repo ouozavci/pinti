@@ -57,7 +57,12 @@
         }
     ?>
 </div>
-<h1>pinti.com</h1>
+<div id="divSearch">
+<form action="search.php" method="get">
+    <input type="text" name="searchKey" placeholder="Ürün Arayın...">
+    <input type="submit" name="search" value="Getir!">
+</form>
+</div>
 <ul>
     <li><a href="">Samsung Galaxy S7 Edge</a></li>
     <li><a href="">Apple Iphone 7 Plus 128G</a></li>
