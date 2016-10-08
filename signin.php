@@ -27,30 +27,31 @@
 <head>
     <title>Kayıt Ol</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="js/signinControl.js"></script>
 </head>
 <body>
 <div class="authForm">
-<form method="post">
+<form name=frm method="post">
     <table>
         <tr>
             <td>E-posta adresiniz:</td>
-            <td><input type="email" name="email"></td>
+            <td><input type="email" name="email" id="txtEmail"></td>
         </tr>
         <tr>
             <td>Kullanıcı adınız:</td>
-            <td><input type="text" name="username"></td>
+            <td><input type="text" name="username" id="txtUsername"></td>
         </tr>
         <tr>
             <td>Şifreniz:</td>
-            <td><input type="password" name="password"></td>
+            <td><input type="password" name="password" id="txtPassword"></td>
         </tr>
         <tr>
             <td>Şifreniz (Tekrar):</td>
-            <td><input type="password" name="passwordAgain"></td>
+            <td><input type="password" name="passwordAgain" id="txtPasswordAgain"></td>
         </tr>
         <tr>
             <td><a href="index.php">Anasayfaya Dön</a></td>
-            <td><input type="submit" name="btnSignin" value="Kayıt Ol"></td>
+            <td><input type="button" name="btnSignin" value="Kayıt Ol" onClick="checkform();"></td>
         </tr>
     </table>
 </form>
