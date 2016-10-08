@@ -58,6 +58,10 @@
     ?>
 </div>
 <h1>pinti.com</h1>
-<p>pinti.com en ucuz fiyatlarla yakında hizmetinizde.</p>
+<ul>
+    <li><a href="">Samsung Galaxy S7 Edge</a></li>
+    <li><a href="">Apple Iphone 7 Plus 128G</a></li>
+    <li><a href="">Asus Zenfone 3 Ultimate Special Edition</a></li>
+</ul>
 </body>
 </html>
