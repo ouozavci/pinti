@@ -11,3 +11,6 @@ body{
     list-style: none;
     display: inline;
 }
+.authForm{
+    background-color: lightgray;
+}

@@ -5,12 +5,13 @@
  * Date: 8.10.2016
  * Time: 14:00
  */?>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 <head>
     <title>Kayıt Ol</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
+<div class="authForm">
 <form method="post">
     <table>
         <tr>
@@ -35,5 +36,6 @@
         </tr>
     </table>
 </form>
+</div>
 </body>
 </html>
