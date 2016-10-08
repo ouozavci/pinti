@@ -1,10 +1,16 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: oguz
- * Date: 8.10.2016
- * Time: 14:00
- */?>
+    if($_POST){
+        if(isset($_POST['username']) && isset($_POST['email'])&&isset($_POST['password'])&&isset($_POST['passwordAgain'])){
+            require_once __DIR__ . '/db/db_connect.php';
+        }
+        else{
+            echo("Missing fields.");
+        }
+    }
+    else{
+
+    }
+?>
 <html xmlns="http://www.w3.org/1999/html">
 <head>
     <title>Kayıt Ol</title>
