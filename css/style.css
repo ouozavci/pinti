@@ -1,4 +1,13 @@
 body{
-    background-color: yellow;
+    background-color: white;
     text-align: center;
+}
+#header{
+    background-color: lightgray;
+    text-align: right;
+}
+#header ul li{
+    padding: 10px;
+    list-style: none;
+    display: inline;
 }
