@@ -51,7 +51,7 @@
         else{
             echo "
             <ul >
-                <li><label>Hoşgeldin <a href='profile.php'>".$_SESSION['username']."</a>.</label></li>
+                <li><label>Hoşgeldin <a href='profile.php?userid=".$_SESSION['id']."'>".$_SESSION['username']."</a>.</label></li>
                 <li ><a href = '' > Ürün Sat </a ></li >
                 <li ><a href = 'help.php' > Yardım</a ></li >
                  <li ><a href = 'logout.php' > Çıkış yap </a ></li >
