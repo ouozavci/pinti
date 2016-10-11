@@ -4,6 +4,7 @@
             $username=$_POST['username'];
             $email=$_POST['email'];
             $password=$_POST['password'];
+            $password=md5($password);
 
             require_once __DIR__ . '/db/db_connect.php';
             $db=new DB_CONNECT(); //DATABASE BAGLANTISI
@@ -32,7 +33,6 @@
 <body>
 <div class="authForm">
 <form name=frm method="post">
-
     <table>
         <tr>
             <td colspan="2"><h1 class="authBaslik">Kayıt Ol</h1></td>

@@ -23,7 +23,6 @@
     }
     else
         $_SESSION["isLogged"]=false;
-
 ?>
 <html>
 <head>
@@ -63,10 +62,5 @@
     <input type="submit" name="search" value="Getir!">
 </form>
 </div>
-<ul>
-    <li><a href="">Samsung Galaxy S7 Edge</a></li>
-    <li><a href="">Apple Iphone 7 Plus 128G</a></li>
-    <li><a href="">Asus Zenfone 3 Ultimate Special Edition</a></li>
-</ul>
 </body>
 </html>
