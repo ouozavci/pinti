@@ -4,21 +4,24 @@
     kullanıcı giriş yaptıktan sonra session içindeki isLogged değeri true olmalıdır ve
     id değeri ise kullanıcının id'si olmalıdır.
     Aşağıdaki kod parçası bunun kontrolünü yapmaktadır.
-    Eğer isLogged değeri tanımlı ve true ise 
+    Eğer isLogged değeri tanımlı ve true ise session içerine kullanıcı id si ve username değerleri girilir.
+
+    Author: Oğuzhan Özavcı
     */
-    if($_SESSION['isLogged']){
+    if(isset($_SESSION['isLogged']))
+        if($_SESSION['isLogged']){
         //$_SESSION['isLogged']=true;
         $userid=$_SESSION['id'];
 
         require_once __DIR__.'/db/db_connect.php';
         $db=new DB_CONNECT();
         $mysqli = $db->connect();
-        $result=mysqli_query($mysqli,"SELECT username FROM users where id='$userid'");
+        $result=mysqli_query($mysqli,"SELECT firstName,lastName FROM users where id='$userid'");
 
         if(!empty($result)){
             if(mysqli_num_rows($result)>0){
                 $result=mysqli_fetch_array($result);
-                $username=$result["username"];
+                $username=$result["firstName"]." ".$result['lastName'];
                 $_SESSION['username']=$username;
             }
         }

@@ -9,7 +9,7 @@
             require_once __DIR__ . '/db/db_connect.php';
             $db=new DB_CONNECT(); //DATABASE BAGLANTISI
             $mysqli = $db->connect();
-            $result=mysqli_query($mysqli,"SELECT * FROM users WHERE email='$email' AND  password='$password'");
+            $result=mysqli_query($mysqli,"SELECT id FROM users WHERE email='$email' AND  password='$password'");
 
             if(!empty($result)){
                 if(mysqli_num_rows($result)>0){

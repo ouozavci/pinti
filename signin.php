@@ -1,6 +1,6 @@
 ﻿<?php
     if($_POST){
-        if(isset($_POST['username']) && isset($_POST['email'])&&isset($_POST['password'])){
+        if(isset($_POST['firstName']) && isset($_POST['lastName']) && isset($_POST['email']) && isset($_POST['password'])){
 
 
             require_once __DIR__ . '/db/db_connect.php';
@@ -13,17 +13,27 @@
 
             if(mysqli_num_rows($result)>0){
                 echo "Bu e-mail daha önceden alınmış!";
-                die();
             }
             else {
-                $username = $_POST['username'];
+                $firstName = $_POST['firstName'];
+                $lastName = $_POST['lastName'];
                 $password = $_POST['password'];
                 $password=md5($password);
 
                 $db = new DB_CONNECT(); //DATABASE BAGLANTISI
-                $result = mysqli_query($mysqli,"INSERT INTO users(username, email, password) VALUES ('$username', '$email', '$password')");
+                $result = mysqli_query($mysqli,"INSERT INTO users(firstName, lastName, email, password) VALUES ('$firstName','$lastName','$email','$password')");
 
                 if ($result) {
+                    session_start();
+
+
+                    $db = new DB_CONNECT(); //DATABASE BAGLANTISI
+                    $result = mysqli_query($mysqli,"SELECT id from users where email='$email'");
+                    $result=mysqli_fetch_array($result);
+
+                    $id=$result["id"];
+                    $_SESSION['isLogged'] = true;
+                    $_SESSION['id']=$id;
                     header("Location: index.php");
                     die();
                 } else
@@ -52,14 +62,17 @@
         <tr>
             <td colspan="2"><h1 class="authBaslik">Kayıt Ol</h1></td>
         </tr>
-
+        <tr>
+            <td><label>Adınız:</label></td>
+            <td><input class="txtBox" type="text" name="firstName" id="txtUsername" placeholder="username"></td>
+        </tr>
+        <tr>
+            <td><label>Soyadınız:</label></td>
+            <td><input class="txtBox" type="text" name="lastName" id="txtUsername" placeholder="username"></td>
+        </tr>
         <tr>
             <td><label>E-posta adresiniz:</label></td>
             <td><input class="txtBox" type="email" name="email" id="txtEmail" placeholder="e-mail"></td>
-        </tr>
-        <tr>
-            <td><label>Kullanıcı adınız:</label></td>
-            <td><input class="txtBox" type="text" name="username" id="txtUsername" placeholder="username"></td>
         </tr>
         <tr>
             <td><label>Şifreniz:</label></td>
