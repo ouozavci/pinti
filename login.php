@@ -1,4 +1,5 @@
 ﻿<?php
+
     if($_POST){
         if(isset($_POST['email'])&&isset($_POST['password'])){
             $email=$_POST['email'];
@@ -6,11 +7,12 @@
 
             require_once __DIR__ . '/db/db_connect.php';
             $db=new DB_CONNECT(); //DATABASE BAGLANTISI
-            $result=mysql_query("SELECT * FROM users WHERE email='$email' AND  password='$password'");
+            $mysqli = $db->connect();
+            $result=mysqli_query($mysqli,"SELECT * FROM users WHERE email='$email' AND  password='$password'");
 
             if(!empty($result)){
-                if(mysql_num_rows($result)>0){
-                    $result=mysql_fetch_array($result);
+                if(mysqli_num_rows($result)>0){
+                    $result=mysqli_fetch_array($result);
 
                     $username=$result["username"];
                     $password=$result["password"];
@@ -18,6 +20,7 @@
 
                     session_start();
                     $_SESSION["id"]=$id;
+
                     $_SESSION["isLogged"]=true;
                     header("Location: index.php");
                     die();
@@ -31,7 +34,6 @@
             echo("Missing fields.");
         }
     }
-
 
 ?>
 <html>

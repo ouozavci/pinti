@@ -7,11 +7,12 @@
 
         require_once __DIR__.'/db/db_connect.php';
         $db=new DB_CONNECT();
-        $result=mysql_query("SELECT * FROM users where id='$userid'");
+        $mysqli = $db->connect();
+        $result=mysqli_query($mysqli,"SELECT * FROM users where id='$userid'");
 
         if(!empty($result)){
-            if(mysql_num_rows($result)>0){
-                $result=mysql_fetch_array($result);
+            if(mysqli_num_rows($result)>0){
+                $result=mysqli_fetch_array($result);
                 $username=$result["username"];
                 $_SESSION["username"]=$username;
             }
@@ -58,10 +59,6 @@
     <input type="submit" name="search" value="Getir!">
 </form>
 </div>
-<ul>
-    <li><a href="">Samsung Galaxy S7 Edge</a></li>
-    <li><a href="">Apple Iphone 7 Plus 128G</a></li>
-    <li><a href="">Asus Zenfone 3 Ultimate Special Edition</a></li>
-</ul>
+
 </body>
 </html>
