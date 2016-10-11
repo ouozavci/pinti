@@ -1,4 +1,4 @@
-<?php
+﻿<?php
     if($_POST){
         if(isset($_POST['username']) && isset($_POST['email'])&&isset($_POST['password'])){
             $username=$_POST['username'];

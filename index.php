@@ -1,4 +1,4 @@
-<?php
+﻿<?php
     session_start();
 
     if(isset($_SESSION['id'])){
@@ -12,14 +12,10 @@
         if(!empty($result)){
             if(mysql_num_rows($result)>0){
                 $result=mysql_fetch_array($result);
-
                 $username=$result["username"];
-
                 $_SESSION["username"]=$username;
-
             }
         }
-
     }
     else
         $_SESSION["isLogged"]=false;
@@ -32,11 +28,11 @@
 </head>
 <body>
 <div id="header">
+    <h1 id = 'logo' > Pinti.com</h1 >
     <?php
 
         if(!$_SESSION["isLogged"]) {
-            echo "
-            <h1 id = 'logo' > Pinti.com</h1 >
+            echo "       
             <ul >
                 <li ><a href = 'signin.php' > Kayıt ol </a ></li >
                 <li ><a href = 'login.php' > Giriş yap </a ></li >
@@ -46,7 +42,6 @@
         }
         else{
             echo "
-            <h1 id = 'logo' > Pinti.com</h1 >
             <ul >
                 <li><label>Hoşgeldin <a href='profile.php'>$username</a>.</label></li>
                 <li ><a href = '' > Ürün Sat </a ></li >
