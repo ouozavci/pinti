@@ -1,14 +1,19 @@
 ﻿<?php
     session_start();
-
-    if(isset($_SESSION['id'])){
-        $_SESSION['isLogged']=true;
+    /*Session başlatıldı ve session içerisinde kullanıcı bilgileri tutulmakta
+    kullanıcı giriş yaptıktan sonra session içindeki isLogged değeri true olmalıdır ve
+    id değeri ise kullanıcının id'si olmalıdır.
+    Aşağıdaki kod parçası bunun kontrolünü yapmaktadır.
+    Eğer isLogged değeri tanımlı ve true ise 
+    */
+    if($_SESSION['isLogged']){
+        //$_SESSION['isLogged']=true;
         $userid=$_SESSION['id'];
 
         require_once __DIR__.'/db/db_connect.php';
         $db=new DB_CONNECT();
         $mysqli = $db->connect();
-        $result=mysqli_query($mysqli,"SELECT * FROM users where id='$userid'");
+        $result=mysqli_query($mysqli,"SELECT username FROM users where id='$userid'");
 
         if(!empty($result)){
             if(mysqli_num_rows($result)>0){
@@ -19,7 +24,7 @@
         }
     }
     else
-        $_SESSION["isLogged"]=false;
+        $_SESSION["id"]=NULL;
 
 ?>
 <html>
