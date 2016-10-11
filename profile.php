@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
   if($_GET){
     if(isset($_GET['userid'])){

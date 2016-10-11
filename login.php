@@ -40,11 +40,51 @@
     <head>
         <title>Giriş Yap</title>
         <link rel="stylesheet" type="text/css" href="css/style.css">
+        <script type="text/javascript" src="js/post.js"></script>
     </head>
     <body>
+    <script>
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId      : '1321780007845681',
+                xfbml      : true,
+                version    : 'v2.8'
+            });
+            FB.AppEvents.logPageView();
+        };
+        function myFacebookLogin() {
+        FB.getLoginStatus(function(response) {
+            if (response.status === 'connected') {
+                console.log('Logged in.');
+                FB.api('/me',{fields: 'first_name,last_name,email'}, function(response) {
+                   // post('',{})
+                    alert("İsim:"+response.first_name+" "+response.last_name+"\nemail:"+response.email);
+                });
+            }
+            else {
+                FB.login(function(response){
+                }, {scope: 'public_profile,email'});
+            }
+        });
+        }
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+
+    </script>
     <div class="authForm">
+        <h1 class="authBaslik">Giriş Yap</h1>
+        <div class="faux-fb-btn">
+            <button onclick="myFacebookLogin()">Facebook ile giriş yap</button>
+        </div>
+        <h5>veya</h5>
         <form method="post" id="loginForm">
-            <h1 class="authBaslik">Giriş Yap</h1>
+
             <table>
                 <tr>
                     <td><label>E-posta adresiniz:</label></td>

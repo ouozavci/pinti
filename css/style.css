@@ -79,11 +79,13 @@ body{
     font-size: 12pt;
     font-weight: bold;
     color: white;
-    border-radius: 4px;
+    border:none;
+    border-radius: 5px;
     border: 1px solid #ccc ;
+    cursor: pointer;
 }
 .authForm input[type=submit]:hover{
-    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    background-color: #aa132b;
 }
 #loginForm {
     position: relative;
@@ -111,4 +113,21 @@ body{
     font-weight: bold;
     color: white;
     border: 1px solid #ccc ;
+    cursor: pointer;
+}
+#divSearch input[type=submit]:hover{
+    background-color: #aa132b;
+}
+.faux-fb-btn button{
+    border-radius: 5px;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    margin: 20px 0;
+    color: #ffffff;
+    font:bold 12px 'Calibri Light','Tahoma','Verdana','Arial';
+    display: block;
+    border: none;
+    background: #406093 url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yR/r/teE39sffXW8.png) no-repeat 10px;
+    cursor: pointer;
 }
