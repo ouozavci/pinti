@@ -1,0 +1,11 @@
+Software Engineering dersi kapsamýnda bir araya geldiðimiz arkadaþlarýmýzla günümüzün en yaygýn sektörlerinden biri
+olan e-ticaret ile ilgili bir proje yapmaya karar verdik. Bunun sonucunda "Pinti.com" adýnda bir online alýþveriþ
+sitesi yapmak üzere çalýþmalara baþladýk.
+
+Yenilikçi ve dinamik düþüncelerin sonucu olarak ortaya çýkan Pinti.com'da kullanýcýlar alýþveriþ yapmanýn yaný sýra,
+satýþ yapabilir ve bu satýþlarý buradan yönetebilir. Kullanýcýlara internetten alýþveriþi güvenilir ve keyifli hale getirmek 
+Pinti.com olarak en büyük hedefimiz.
+
+Pinti.com projesinde web tasarýmý için HTML5, CSS3, Bootstrap ve Javascript, sitenin arkaplanýnda çalýþan kodlar için PHP, 
+veritabaný iþlemleri için ise MySql kullanmaya karak verdik. Ayrýca projeyi tüm takým arkadaþlarýmýzla birlikte daha etkili
+bir þekilde yapmak için Git kullandýk. 

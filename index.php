@@ -19,7 +19,7 @@
             if(mysqli_num_rows($result)>0){
                 $result=mysqli_fetch_array($result);
                 $username=$result["username"];
-                $_SESSION["username"]=$username;
+                $_SESSION['username']=$username;
             }
         }
     }
@@ -33,13 +33,13 @@
 </head>
 <body>
 <div id="header">
-    <h1 id = 'logo' > Pinti.com</h1 >
+    <a href=""><img id="logo" align="left" src="img/logo.png" width="10%" alt="pinti.com"/></a>
     <?php
 
         if(!$_SESSION["isLogged"]) {
             echo "       
             <ul >
-                <li ><a href = 'signin.php' > Kayıt ol </a ></li >
+                <li ><a href = 'signin.php' > Üye ol </a ></li >
                 <li ><a href = 'login.php' > Giriş yap </a ></li >
                 <li ><a href = '' > Ürün Sat </a ></li >
                 <li ><a href = 'help.php' > Yardım</a ></li >
@@ -48,7 +48,7 @@
         else{
             echo "
             <ul >
-                <li><label>Hoşgeldin <a href='profile.php'>$username</a>.</label></li>
+                <li><label>Hoşgeldin <a href='profile.php'>".$_SESSION['username']."</a>.</label></li>
                 <li ><a href = '' > Ürün Sat </a ></li >
                 <li ><a href = 'help.php' > Yardım</a ></li >
                  <li ><a href = 'logout.php' > Çıkış yap </a ></li >
@@ -62,6 +62,9 @@
     <input type="text" name="searchKey" placeholder="Ürün Arayın...">
     <input type="submit" name="search" value="Getir!">
 </form>
+</div>
+<div>
+    <a style="font-size: 21pt; color: crimson" href="bilgilendirme/index.html">Daha fazla bilgi sahibi olmak için tıklayınız...</a>
 </div>
 </body>
 </html>

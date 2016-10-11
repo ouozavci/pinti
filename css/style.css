@@ -4,19 +4,23 @@ body{
 }
 #header{
     background-color:#f2f2f2;
+    height: 60px;
     text-align: right;
+
     border-bottom: solid 1px crimson;
 }
 #logo{
-    text-align: left;
     font-family:  "Trebuchet MS";
     color:crimson;
-
+}
+#header ul{
+    padding-top: 36px;
 }
 #header ul li{
     font-family: "Times New Roman";
     color: black;
     padding: 10px;
+
     list-style: none;
     display: inline;
 }
