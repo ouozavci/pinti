@@ -50,7 +50,7 @@
         <?php echo $error_message; ?>
     <?php } ?>
 </div>
-<div class="authForm">
+<div class="autoForm">
     <form method="post" id="sifremiUnuttumForm" onSubmit="return validate_forgot();>
         <table>
             <tr>
