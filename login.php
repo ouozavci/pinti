@@ -4,6 +4,7 @@
         if(isset($_POST['email'])&&isset($_POST['password'])){
             $email=$_POST['email'];
             $password=$_POST['password'];
+            $password=md5($password);
 
             require_once __DIR__ . '/db/db_connect.php';
             $db=new DB_CONNECT(); //DATABASE BAGLANTISI
@@ -14,10 +15,9 @@
                 if(mysqli_num_rows($result)>0){
                     $result=mysqli_fetch_array($result);
 
-                    $username=$result["username"];
-                    $password=$result["password"];
-                    $id=$result["id"];
 
+                    $id=$result["id"];
+                    
                     session_start();
                     $_SESSION["id"]=$id;
                     $_SESSION["isLogged"]=true;
@@ -55,7 +55,7 @@
                     <td><input class="txtBox" type="password" name="password" placeholder="password"></td>
                 </tr>
                 <tr>
-                    <td><a href="forgotPassword.php"><label>Şifremi unuttum.</label></a></td>
+                    <td><a href="sifremi_unuttum.php"><label>Şifremi unuttum.</label></a></td>
                     <td><input type="submit" name="btnLogin" value="Giriş Yap"></td>
                 </tr>
             </table>

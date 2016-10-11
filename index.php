@@ -25,7 +25,6 @@
     }
     else
         $_SESSION["id"]=NULL;
-
 ?>
 <html>
 <head>
@@ -64,6 +63,5 @@
     <input type="submit" name="search" value="Getir!">
 </form>
 </div>
-
 </body>
 </html>

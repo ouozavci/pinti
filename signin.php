@@ -2,6 +2,7 @@
     if($_POST){
         if(isset($_POST['username']) && isset($_POST['email'])&&isset($_POST['password'])){
 
+
             require_once __DIR__ . '/db/db_connect.php';
             $db=new DB_CONNECT(); //DATABASE BAGLANTISI
             $mysqli = $db->connect();
@@ -17,6 +18,7 @@
             else {
                 $username = $_POST['username'];
                 $password = $_POST['password'];
+                $password=md5($password);
 
                 $db = new DB_CONNECT(); //DATABASE BAGLANTISI
                 $result = mysqli_query($mysqli,"INSERT INTO users(username, email, password) VALUES ('$username', '$email', '$password')");
@@ -46,7 +48,6 @@
 <body>
 <div class="authForm">
 <form name=frm method="post">
-
     <table>
         <tr>
             <td colspan="2"><h1 class="authBaslik">Kayıt Ol</h1></td>
