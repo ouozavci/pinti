@@ -41,6 +41,9 @@
        <tr>
            <td><label>Email:</label><?php echo $email ?></td>
        </tr>
+       <tr>
+           <td><a href="index.php">Anasayfaya Dön</a></td>
+       </tr>
    </table>
    </body>
 </html>

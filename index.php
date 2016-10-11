@@ -8,7 +8,7 @@
 
     Author: Oğuzhan Özavcı
     */
-    if(isset($_SESSION['isLogged']))
+    if(isset($_SESSION['isLogged'])){
         if($_SESSION['isLogged']){
         //$_SESSION['isLogged']=true;
         $userid=$_SESSION['id'];
@@ -26,8 +26,14 @@
             }
         }
     }
-    else
+        else{
+            $_SESSION["isLogged"]=false;
+        }
+    }
+    else{
         $_SESSION["id"]=NULL;
+        $_SESSION["isLogged"]=false;
+    }
 ?>
 <html>
 <head>
