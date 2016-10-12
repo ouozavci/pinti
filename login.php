@@ -6,7 +6,7 @@
             $password=$_POST['password'];
             $password=md5($password);
 
-            require_once __DIR__ . '/db/db_connect.php';
+            require_once __DIR__ . '/model/db/db_connect.php';
             $db=new DB_CONNECT(); //DATABASE BAGLANTISI
             $mysqli = $db->connect();
             $result=mysqli_query($mysqli,"SELECT id FROM users WHERE email='$email' AND  password='$password'");

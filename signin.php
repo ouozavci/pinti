@@ -2,51 +2,37 @@
     if($_POST){
         if(isset($_POST['firstName']) && isset($_POST['lastName']) && isset($_POST['email']) && isset($_POST['password'])){
 
-
-            require_once __DIR__ . '/db/db_connect.php';
-            $db=new DB_CONNECT(); //DATABASE BAGLANTISI
-            $mysqli = $db->connect();
-
+            require_once __DIR__.'/model/User.php';
 
             $email=$_POST['email'];
-            $result=mysqli_query($mysqli,"SELECT email from users WHERE email = '$email'");
+            //  $result=mysqli_query($mysqli,"SELECT email from users WHERE email = '$email'");
 
-            if(mysqli_num_rows($result)>0){
+            if(User::isExist($email)){
                 echo "Bu e-mail daha önceden alınmış!";
             }
             else {
                 $firstName = $_POST['firstName'];
                 $lastName = $_POST['lastName'];
                 $password = $_POST['password'];
-                $password=md5($password);
 
-                $db = new DB_CONNECT(); //DATABASE BAGLANTISI
-                $result = mysqli_query($mysqli,"INSERT INTO users(firstName, lastName, email, password) VALUES ('$firstName','$lastName','$email','$password')");
+                $result = User::insert($firstName,$lastName,$email,$password);
+
 
                 if ($result) {
                     session_start();
 
-
-                    $db = new DB_CONNECT(); //DATABASE BAGLANTISI
-                    $result = mysqli_query($mysqli,"SELECT id from users where email='$email'");
-                    $result=mysqli_fetch_array($result);
-
-                    $id=$result["id"];
+                    $id = User::getId($email);
                     $_SESSION['isLogged'] = true;
                     $_SESSION['id']=$id;
                     header("Location: index.php");
                     die();
                 } else
                     echo("error.");
-
             }
         }
         else{
             echo("Missing fields.");
         }
-    }
-    else{
-
     }
 ?>
 <html xmlns="http://www.w3.org/1999/html">
