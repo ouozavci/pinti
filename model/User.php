@@ -35,16 +35,17 @@ require_once __DIR__ . '/db/db_connect.php';
             }
         }
 
-        public static function insert($firstName, $lastName, $email, $password, $signType)
+        public static function insert($firstName, $lastName, $email, $password, $signType, $facebookID)
         {
 
             $db = new DB_CONNECT();
             $mysqli = $db->connect();
             $password = md5($password);
-            $result = mysqli_query($mysqli, "INSERT INTO users(firstName, lastName, email, password, signType) VALUES ('$firstName','$lastName','$email','$password','$signType')");
+            $result = mysqli_query($mysqli, "INSERT INTO users(firstName, lastName, email, password, signType, facebookID) VALUES ('$firstName','$lastName','$email','$password','$signType','$facebookID')");
             return $result;
 
         }
+
 
         public static function isExist($email)
         {
@@ -92,5 +93,20 @@ require_once __DIR__ . '/db/db_connect.php';
                     return NULL;
             }
 
+        }
+        public static function checkFacebookID($email,$facebookID){
+            $db = new DB_CONNECT();
+            $mysqli = $db->connect();
+            $result = mysqli_query($mysqli, "SELECT id FROM users WHERE email='$email' AND facebookID='$facebookID'");
+
+            if (!empty($result)) {
+                if (mysqli_num_rows($result) > 0) {
+                    $result = mysqli_fetch_array($result);
+
+                    $id = $result["id"];
+                    return $id;
+                } else
+                    return NULL;
+            }
         }
     }

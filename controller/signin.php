@@ -21,7 +21,10 @@ if($_POST){
             $password = $_POST['password'];
             $signType = $_POST['signType'];
 
-            $result = User::insert($firstName,$lastName,$email,$password,$signType);
+                $facebookID = $_POST['facebookID'];
+
+                $result = User::insert($firstName, $lastName, $email, $password, $signType, $facebookID);
+
 
 
             if ($result) {
@@ -30,7 +33,7 @@ if($_POST){
                 $id = User::getId($email);
                 $_SESSION['isLogged'] = true;
                 $_SESSION['id']=$id;
-                print_r($_POST);
+
                 header("Location: ../pinti");
                 die();
             } else

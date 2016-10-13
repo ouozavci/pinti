@@ -27,11 +27,25 @@
                         params["firstName"] = response.first_name;
                         params["lastName"]=response.last_name;
                         params["email"]=response.email;
-                        params["password"]=response.id;
+                        params["password"]=null;
+                        params["facebookID"]=response.id;
                         params["signType"]="fb";
 
-                     //Javascript kullanarak post yapan method..
-                     submit("signin",params,"post");
+                     /* var form = document.createElement("form");
+                        form.setAttribute("method","post");
+                        var hiddenField = document.createElement("input");
+                        hiddenField.setAttribute("type","hidden");
+                        hiddenField.setAttribute("name","email");
+                        hiddenField.setAttribute("value",response.email);
+
+                        form.appendChild(hiddenField);
+
+                        document.body.appendChild(form);
+                        form.submit();
+                        */
+
+                    //Javascript kullanarak post yapan method..
+                    submit("login",params,"post");
                 });
             }
             else {

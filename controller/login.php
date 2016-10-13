@@ -7,57 +7,62 @@ require_once __DIR__.'/../model/User.php';
  * Date: 13.10.2016
  * Time: 11:05
  */
-    if($_POST){
-        if(isset($_POST['email'])&&isset($_POST['password'])){
-            $email=$_POST['email'];
-            $password=$_POST['password'];
+    if($_POST) {
+        if (isset($_POST['email']) && isset($_POST['password'])) {
+            $email = $_POST['email'];
+            $password = $_POST['password'];
 
-            $id = User::checkPassword($email,$password);
+            if (isset($_POST['signType'])) {
+                $signType = $_POST['signType'];
+                if ($signType == 'fb') {
+                    $facebookID = $_POST['facebookID'];
 
-            if($id==NULL){
-                echo "E-mail yada ?ifrenizi yanl?? girdiniz.";
+                    $id = User::checkFacebookID($email, $facebookID);
+
+                    if ($id == NULL) {
+
+                        $firstName = $_POST['firstName'];
+                        $lastName = $_POST['lastName'];
+
+                        $result = User::insert($firstName, $lastName, $email, NULL, "fb", $facebookID);
+                        if ($result) {
+                            session_start();
+
+                            $id = User::getId($email);
+                            $_SESSION['isLogged'] = true;
+                            $_SESSION['id'] = $id;
+
+                            header("Location: ../pinti");
+                            die();
+                        } else echo("error.");
+                    } else {
+                        session_start();
+                        $_SESSION["id"] = $id;
+                        $_SESSION["isLogged"] = true;
+
+                        header("Location: ../pinti");
+                        die();
+                    }
+                }
             }
-            else{
+            if ($password == NULL) {
+                echo "Lütfen şifrenizi giriniz";
 
-                session_start();
-                $_SESSION["id"]=$id;
-                $_SESSION["isLogged"]=true;
-
-                header("Location: ../pinti");
-                die();
-            }
-        }
-        }
-
-         /*   require_once __DIR__ . '/../model/db/db_connect.php';
-            $db=new DB_CONNECT(); //DATABASE BAGLANTISI
-            $mysqli = $db->connect();
-            $result=mysqli_query($mysqli,"SELECT id FROM users WHERE email='$email' AND  password='$password'");
-
-
-
-            if(!empty($result)){
-                if(mysqli_num_rows($result)>0){
-                    $result=mysqli_fetch_array($result);
-
-
-                    $id=$result["id"];
+            } else {
+                $id = User::checkPassword($email, $password);
+                if ($id == NULL) {
+                    echo "E-mail yada şifrenizi yanlış girdiniz.";
+                } else {
 
                     session_start();
-                    $_SESSION["id"]=$id;
-                    $_SESSION["isLogged"]=true;
+                    $_SESSION["id"] = $id;
+                    $_SESSION["isLogged"] = true;
 
                     header("Location: ../pinti");
                     die();
                 }
-                else
-                    echo("invalid.");
-            }else
-                echo("invalid.");
+            }
         }
-        else{
-            echo("Missing fields.");
-        }
-    }*/
+    }
     require_once __DIR__ . '/../view/login.phtml';
 ?>
