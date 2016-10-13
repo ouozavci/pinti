@@ -8,10 +8,9 @@
 if($_POST){
     if(isset($_POST['firstName']) && isset($_POST['lastName']) && isset($_POST['email']) && isset($_POST['password'])){
 
-        require_once __DIR__.'/model/User.php';
+        require_once __DIR__.'/../model/User.php';
 
         $email=$_POST['email'];
-        //  $result=mysqli_query($mysqli,"SELECT email from users WHERE email = '$email'");
 
         if(User::isExist($email)){
             echo "Bu e-mail daha önceden alınmış!";
@@ -30,7 +29,7 @@ if($_POST){
                 $id = User::getId($email);
                 $_SESSION['isLogged'] = true;
                 $_SESSION['id']=$id;
-                header("Location: index.php");
+                header("Location: ../index.php");
                 die();
             } else
                 echo("error.");
@@ -39,6 +38,7 @@ if($_POST){
     else{
         echo("Missing fields.");
     }
-}
 
+}
+    //require_once __DIR__.'/../signin.php';
 ?>

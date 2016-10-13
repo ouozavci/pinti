@@ -61,9 +61,11 @@ require_once __DIR__ . '/db/db_connect.php';
             $mysqli = $db->connect();
             $result=mysqli_query($mysqli,"SELECT id from users WHERE email = '$email'");
             $result=mysqli_fetch_array($result);
-            if(mysqli_num_rows($result)>0)
-            return $result["id"];
-            else return NULL;
+            //if(mysqli_num_rows($result)>0) {
+                $id = $result["id"];
+                return $id;
+           // }
+          //  else return NULL;
 
         }
 

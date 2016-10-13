@@ -26,5 +26,6 @@ function checkform() {
         return false;
     } else {
         document.frm.submit();
+
     }
 }
