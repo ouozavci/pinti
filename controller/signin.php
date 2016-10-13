@@ -13,7 +13,7 @@ if($_POST){
         $email=$_POST['email'];
 
         if(User::isExist($email)){
-            echo "Bu e-mail daha önceden alınmış!";
+            echo "Bu email zaten alınmış";
         }
         else {
             $firstName = $_POST['firstName'];
