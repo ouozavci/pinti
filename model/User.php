@@ -8,7 +8,8 @@
 
 require_once __DIR__ . '/db/db_connect.php';
 
-    class User {
+    class User
+    {
 
         public $id;
         public $firstName;
@@ -16,57 +17,80 @@ require_once __DIR__ . '/db/db_connect.php';
         public $email;
         public $signType;
 
-        public function getCustomerById($userid){
-            $db=new DB_CONNECT();
+        public function getCustomerById($userid)
+        {
+            $db = new DB_CONNECT();
             $mysqli = $db->connect();
-            $result=mysqli_query($mysqli,"SELECT * FROM users where id='$userid'");
+            $result = mysqli_query($mysqli, "SELECT * FROM users where id='$userid'");
 
-            if(!empty($result)){
-                if(mysqli_num_rows($result)>0){
-                    $result=mysqli_fetch_array($result);
-                    $this->id=$result['id'];
-                    $this->firstName=$result['firstName'];
-                    $this->lastName=$result['lastName'];
-                    $this->email=$result['email'];
+            if (!empty($result)) {
+                if (mysqli_num_rows($result) > 0) {
+                    $result = mysqli_fetch_array($result);
+                    $this->id = $result['id'];
+                    $this->firstName = $result['firstName'];
+                    $this->lastName = $result['lastName'];
+                    $this->email = $result['email'];
                     //signType--------------------
                 }
             }
         }
-        public static function insert($firstName,$lastName,$email,$password){
 
-            $db=new DB_CONNECT();
+        public static function insert($firstName, $lastName, $email, $password)
+        {
+
+            $db = new DB_CONNECT();
             $mysqli = $db->connect();
-            $password=md5($password);
-            $result = mysqli_query($mysqli,"INSERT INTO users(firstName, lastName, email, password) VALUES ('$firstName','$lastName','$email','$password')");
+            $password = md5($password);
+            $result = mysqli_query($mysqli, "INSERT INTO users(firstName, lastName, email, password) VALUES ('$firstName','$lastName','$email','$password')");
             return $result;
 
         }
-        public static function isExist($email){
 
-            $db=new DB_CONNECT();
+        public static function isExist($email)
+        {
+
+            $db = new DB_CONNECT();
             $mysqli = $db->connect();
-            $result=mysqli_query($mysqli,"SELECT email from users WHERE email = '$email'");
+            $result = mysqli_query($mysqli, "SELECT email from users WHERE email = '$email'");
 
-            if(mysqli_num_rows($result)>0){
-               return true;
-            }
-            else{
+            if (mysqli_num_rows($result) > 0) {
+                return true;
+            } else {
                 return false;
             }
 
         }
-        public static function getId($email){
 
-            $db=new DB_CONNECT();
+        public static function getId($email)
+        {
+
+            $db = new DB_CONNECT();
             $mysqli = $db->connect();
-            $result=mysqli_query($mysqli,"SELECT id from users WHERE email = '$email'");
-            $result=mysqli_fetch_array($result);
-            //if(mysqli_num_rows($result)>0) {
+            $result = mysqli_query($mysqli, "SELECT id from users WHERE email = '$email'");
+
+            if (mysqli_num_rows($result) > 0) {
+                $result = mysqli_fetch_array($result);
                 $id = $result["id"];
                 return $id;
-           // }
-          //  else return NULL;
-
+            } else return NULL;
         }
 
+        public static function checkPassword($email, $password)
+        {
+            $password = md5($password);
+            $db = new DB_CONNECT();
+            $mysqli = $db->connect();
+            $result = mysqli_query($mysqli, "SELECT id FROM users WHERE email='$email' AND password='$password'");
+
+            if (!empty($result)) {
+                if (mysqli_num_rows($result) > 0) {
+                    $result = mysqli_fetch_array($result);
+
+                    $id = $result["id"];
+                    return $id;
+                } else
+                    return NULL;
+            }
+
+        }
     }

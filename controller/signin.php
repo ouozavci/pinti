@@ -29,7 +29,8 @@ if($_POST){
                 $id = User::getId($email);
                 $_SESSION['isLogged'] = true;
                 $_SESSION['id']=$id;
-                header("Location: ../index.php");
+                print_r($_POST);
+                header("Location: ../pinti");
                 die();
             } else
                 echo("error.");
@@ -40,5 +41,5 @@ if($_POST){
     }
 
 }
-    //require_once __DIR__.'/../signin.php';
+    require_once __DIR__ . '/../view/signin.phtml';
 ?>

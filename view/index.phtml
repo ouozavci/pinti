@@ -1,0 +1,42 @@
+﻿<html>
+<head>
+    <title>Main Page</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+</head>
+<body>
+<div id="header">
+    <a href=""><img id="logo" align="left" src="img/logo.png" width="10%" alt="pinti.com"/></a>
+    <?php
+
+        if(!$_SESSION["isLogged"]) {
+            echo "       
+            <ul >
+                <li ><a href = 'signin' > Üye ol </a ></li >
+                <li ><a href = 'login'> Giriş yap </a ></li >
+                <li ><a href = '' > Ürün Sat </a ></li >
+                <li ><a href = 'help.phtml' > Yardım</a ></li >
+            </ul >";
+        }
+        else{
+            echo "
+            <ul >
+                <li><label>Hoşgeldin <a href='profile?userid=".$_SESSION['id']."'>".$_SESSION['username']."</a>.</label></li>
+                <li ><a href = '' > Ürün Sat </a ></li >
+                <li ><a href = 'help.phtml' > Yardım</a ></li >
+                 <li ><a href = 'logout' > Çıkış yap </a ></li >
+            </ul >
+            " ;
+        }
+    ?>
+</div>
+<div id="divSearch">
+<form action="search.php" method="get">
+    <input type="text" name="searchKey" placeholder="Ürün Arayın...">
+    <input type="submit" name="search" value="Getir!">
+</form>
+</div>
+<div>
+    <a style="font-size: 21pt; color: crimson" href="bilgilendirme/index.html">Daha fazla bilgi sahibi olmak için tıklayınız...</a>
+</div>
+</body>
+</html>

@@ -1,46 +1,8 @@
-﻿<?php
-
-    if($_POST){
-        if(isset($_POST['email'])&&isset($_POST['password'])){
-            $email=$_POST['email'];
-            $password=$_POST['password'];
-            $password=md5($password);
-
-            require_once __DIR__ . '/model/db/db_connect.php';
-            $db=new DB_CONNECT(); //DATABASE BAGLANTISI
-            $mysqli = $db->connect();
-            $result=mysqli_query($mysqli,"SELECT id FROM users WHERE email='$email' AND  password='$password'");
-
-            if(!empty($result)){
-                if(mysqli_num_rows($result)>0){
-                    $result=mysqli_fetch_array($result);
-
-
-                    $id=$result["id"];
-
-                    session_start();
-                    $_SESSION["id"]=$id;
-                    $_SESSION["isLogged"]=true;
-
-                    header("Location: index.php");
-                    die();
-                }
-                else
-                    echo("invalid.");
-            }else
-                echo("invalid.");
-        }
-        else{
-            echo("Missing fields.");
-        }
-    }
-
-?>
-<html>
+﻿<html>
     <head>
         <title>Giriş Yap</title>
         <link rel="stylesheet" type="text/css" href="css/style.css">
-        <script type="text/javascript" src="js/post.js"></script>
+        <script type="text/javascript" src="../js/post.js"></script>
     </head>
     <body>
     <script>
@@ -95,7 +57,7 @@
                     <td><input class="txtBox" type="password" name="password" placeholder="password"></td>
                 </tr>
                 <tr>
-                    <td><a href="sifremi_unuttum.php"><label>Şifremi unuttum.</label></a></td>
+                    <td><a href="../sifremi_unuttum.php"><label>Şifremi unuttum.</label></a></td>
                     <td><input type="submit" name="btnLogin" value="Giriş Yap"></td>
                 </tr>
             </table>

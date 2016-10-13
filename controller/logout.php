@@ -10,7 +10,7 @@
     $_SESSION["id"]=null;
     $_SESSION["isLogged"]=false;
 
-    header("Location: index.php");
+    header("Location: ../pinti");
     die();
 
 ?>
