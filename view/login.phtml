@@ -2,7 +2,7 @@
     <head>
         <title>Giriş Yap</title>
         <link rel="stylesheet" type="text/css" href="css/style.css">
-        <script type="text/javascript" src="../js/post.js"></script>
+        <script type="text/javascript" src="js/submit.js"></script>
     </head>
     <body>
     <script>
@@ -18,9 +18,20 @@
         FB.getLoginStatus(function(response) {
             if (response.status === 'connected') {
                 console.log('Logged in.');
-                FB.api('/me',{fields: 'first_name,last_name,email'}, function(response) {
-                   // post('',{})
-                    alert("İsim:"+response.first_name+" "+response.last_name+"\nemail:"+response.email);
+                FB.api(
+                    '/me',
+                    {fields: 'id,first_name,last_name,email'}, function(response){
+
+                    //Post edilecek parametreler
+                        params = new Array();
+                        params["firstName"] = response.first_name;
+                        params["lastName"]=response.last_name;
+                        params["email"]=response.email;
+                        params["password"]=response.id;
+                        params["signType"]="fb";
+
+                     //Javascript kullanarak post yapan method..
+                     submit("signin",params,"post");
                 });
             }
             else {

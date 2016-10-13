@@ -1,7 +1,7 @@
 /**
  * Created by oguz on 12.10.2016.
  */
-function post(path, params, method) {
+function submit(path, params, method) {
     method = method || "post"; // Set method to post by default if not specified.
 
     // The rest of this code assumes you are not using a library.

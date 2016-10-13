@@ -6,7 +6,7 @@
  * Time: 00:23
  */
 if($_POST){
-    if(isset($_POST['firstName']) && isset($_POST['lastName']) && isset($_POST['email']) && isset($_POST['password'])){
+    if(isset($_POST['firstName']) && isset($_POST['lastName']) && isset($_POST['email']) && isset($_POST['password']) && isset($_POST['signType'])){
 
         require_once __DIR__.'/../model/User.php';
 
@@ -19,8 +19,9 @@ if($_POST){
             $firstName = $_POST['firstName'];
             $lastName = $_POST['lastName'];
             $password = $_POST['password'];
+            $signType = $_POST['signType'];
 
-            $result = User::insert($firstName,$lastName,$email,$password);
+            $result = User::insert($firstName,$lastName,$email,$password,$signType);
 
 
             if ($result) {

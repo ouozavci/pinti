@@ -35,13 +35,13 @@ require_once __DIR__ . '/db/db_connect.php';
             }
         }
 
-        public static function insert($firstName, $lastName, $email, $password)
+        public static function insert($firstName, $lastName, $email, $password, $signType)
         {
 
             $db = new DB_CONNECT();
             $mysqli = $db->connect();
             $password = md5($password);
-            $result = mysqli_query($mysqli, "INSERT INTO users(firstName, lastName, email, password) VALUES ('$firstName','$lastName','$email','$password')");
+            $result = mysqli_query($mysqli, "INSERT INTO users(firstName, lastName, email, password, signType) VALUES ('$firstName','$lastName','$email','$password','$signType')");
             return $result;
 
         }
