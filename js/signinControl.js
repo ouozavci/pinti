@@ -16,16 +16,35 @@ function checkEmpty() {
     else
         return false;
 }
+function checkCharacters() {
+    var turkishcharacters = "çöğüş"
+    if (document.getElementById("txtPassword").value.length < 8 || document.getElementById("txtPasswordAgain").value.length < 8) {
+        document.getElementById("lblErrorPassword").innerHTML="Lütfen 8 haneden büyük bir şifre giriniz.";
+    }
+    //else if(document.getElementById("txtPassword").value.match(/ç ö ğ ü ş/) != -1 ){
+    //  alert("Lütfen şifrenizde türkçe karakter kullanmayınız.");
+    else if(document.getElementById("txtPassword").value.search("[çöğüş]") != -1){
+        document.getElementById("lblErrorPassword").innerHTML="Lütfen şifrenizde türkçe karakter kullanmayınız";
+    }
+    else{
+    document.frm.submit();
+}
+
+}
 function checkform() {
     if(!checkEmpty()){
-        alert("Tüm alanları doldurun.");
+        document.getElementById("lblErrorPassword").innerHTML="Tüm alanları doldurun.";
         return false;
     }
     else if(!checkPassword()) {
-        alert("Şifreler birbirine uyuşmuyor.")
+        document.getElementById("lblErrorPassword").innerHTML="Şifreler birbirine uyuşmuyor.";
         return false;
-    } else {
-        document.frm.submit();
-
     }
+    else if(!checkCharacters()){
+        return false;
+    }
+    else {
+        document.frm.submit();
+    }
+
 }
