@@ -6,7 +6,6 @@
  * Date: 13.10.2016
  * Time: 23:14
  */
-require_once __DIR__.'/../model/Product.php';
 require_once __DIR__.'/db/db_connect.php';
 class Product
 {
@@ -21,6 +20,7 @@ class Product
         $mysqli = $db->connect();
         $result = mysqli_query($mysqli, "SELECT * FROM products");
         return $result;
+
     }
     
 }

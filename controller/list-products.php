@@ -1,5 +1,5 @@
 <?
-require_once __DIR__.'/../model/Product.php';
+require_once __DIR__ . '/../model/Product.php';
 
 
 $products = Product::getAll();
