@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__.'/../model/User.php';
+require_once __DIR__.'/../model/Constants.php';
 
 /**
  * Created by PhpStorm.
@@ -32,7 +33,8 @@ require_once __DIR__.'/../model/User.php';
                             $_SESSION['isLogged'] = true;
                             $_SESSION['id'] = $id;
 
-                            header("Location: ../pinti");
+
+                            header("Location: ".Constants::$serverUrl);
                             die();
                         } else echo("error.");
                     } else {
@@ -40,7 +42,7 @@ require_once __DIR__.'/../model/User.php';
                         $_SESSION["id"] = $id;
                         $_SESSION["isLogged"] = true;
 
-                        header("Location: ../pinti");
+                        header("Location: ".Constants::$serverUrl);
                         die();
                     }
                 }
@@ -58,7 +60,7 @@ require_once __DIR__.'/../model/User.php';
                     $_SESSION["id"] = $id;
                     $_SESSION["isLogged"] = true;
 
-                    header("Location: ../pinti");
+                    header("Location: ".Constants::$serverUrl);
                     die();
                 }
             }

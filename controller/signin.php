@@ -5,6 +5,7 @@
  * Date: 13.10.2016
  * Time: 00:23
  */
+require_once __DIR__.'/../model/Constants.php';
 if($_POST){
     if(isset($_POST['firstName']) && isset($_POST['lastName']) && isset($_POST['email']) && isset($_POST['password']) && isset($_POST['signType'])){
 
@@ -34,7 +35,7 @@ if($_POST){
                 $_SESSION['isLogged'] = true;
                 $_SESSION['id']=$id;
 
-                header("Location: ../pinti");
+                header("Location: ".Constants::$serverUrl);
                 die();
             } else
                 echo("error.");
