@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Anamakine: 127.0.0.1
--- Üretim Zamanı: 16 Eki 2016, 20:48:36
+-- Üretim Zamanı: 17 Eki 2016, 00:25:46
 -- Sunucu sürümü: 10.1.16-MariaDB
 -- PHP Sürümü: 5.6.24
 
@@ -37,12 +37,12 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`id`, `name`, `parent_id`) VALUES
-(1, 'Giyim & Ayakkabı', NULL),
-(2, 'Elektronik', NULL),
-(3, 'Ev, Bahçe, Ofis', NULL),
-(4, 'Spor & Outdoor', NULL),
-(5, 'Hobi, Eğlence ve Sanat', NULL),
-(6, 'Kişisel Bakım & Kozmetik', NULL),
+(1, 'Giyim & Ayakkabı', 0),
+(2, 'Elektronik', 0),
+(3, 'Ev, Bahçe, Ofis', 0),
+(4, 'Spor & Outdoor', 0),
+(5, 'Hobi, Eğlence ve Sanat', 0),
+(6, 'Kişisel Bakım & Kozmetik', 0),
 (7, 'Ayakkabı & Çanta', 1),
 (8, 'Kadın Giyim & Aksesuar', 1),
 (9, 'Erkek Giyim & Aksesuar', 1),
@@ -118,18 +118,23 @@ CREATE TABLE `users` (
   `phoneNumber` mediumtext COLLATE utf8mb4_turkish_ci,
   `address` mediumtext COLLATE utf8mb4_turkish_ci,
   `signType` text COLLATE utf8mb4_turkish_ci NOT NULL,
-  `facebookID` text COLLATE utf8mb4_turkish_ci
+  `facebookID` text COLLATE utf8mb4_turkish_ci,
+  `img_url` text COLLATE utf8mb4_turkish_ci,
+  `register_date` date NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
 
 --
 -- Tablo döküm verisi `users`
 --
 
-INSERT INTO `users` (`id`, `firstName`, `lastName`, `email`, `password`, `phoneNumber`, `address`, `signType`, `facebookID`) VALUES
-(38, 'Can', 'Canbay', 'can._canbay@hotmail.com', 'd41d8cd98f00b204e9800998ecf8427e', NULL, NULL, 'fb', '10154517555249774'),
-(35, 'Oğuzhan', 'Özavcı', 'ouozavci@gmail.com', 'd41d8cd98f00b204e9800998ecf8427e', NULL, NULL, 'fb', '10202083311760485'),
-(39, 'Kaan', 'Taş', 'kaan.t7@hotmail.com', 'd41d8cd98f00b204e9800998ecf8427e', NULL, NULL, 'fb', '10206948770059608'),
-(40, 'kaan', 'taş', 'afajshfajhfjahjha', '202cb962ac59075b964b07152d234b70', NULL, NULL, 'form', '');
+INSERT INTO `users` (`id`, `firstName`, `lastName`, `email`, `password`, `phoneNumber`, `address`, `signType`, `facebookID`, `img_url`, `register_date`) VALUES
+(38, 'Can', 'Canbay', 'can._canbay@hotmail.com', 'd41d8cd98f00b204e9800998ecf8427e', NULL, NULL, 'fb', '10154517555249774', NULL, '0000-00-00'),
+(35, 'Oğuzhan', 'Özavcı', 'ouozavci@gmail.com', 'd41d8cd98f00b204e9800998ecf8427e', NULL, NULL, 'fb', '10202083311760485', NULL, '0000-00-00'),
+(39, 'Kaan', 'Taş', 'kaan.t7@hotmail.com', 'd41d8cd98f00b204e9800998ecf8427e', NULL, NULL, 'fb', '10206948770059608', NULL, '0000-00-00'),
+(40, 'kaan', 'taş', 'afajshfajhfjahjha', '202cb962ac59075b964b07152d234b70', NULL, NULL, 'form', '', NULL, '0000-00-00'),
+(41, 'kaan', 'taş', 'kaan.tas.31@facebook.com', '25f9e794323b453885f5181f1b624d0b', NULL, NULL, 'form', '', NULL, '0000-00-00'),
+(43, 'doğukan', 'taş', 'dogukan_tas@hotmail.com', '25f9e794323b453885f5181f1b624d0b', NULL, NULL, 'form', '', NULL, '2016-10-16'),
+(44, 'kaan', 'a', 'asfafa@a.com', '25f9e794323b453885f5181f1b624d0b', NULL, NULL, 'form', '', NULL, '2016-10-17');
 
 --
 -- Dökümü yapılmış tablolar için indeksler
@@ -161,7 +166,7 @@ ALTER TABLE `users`
 -- Tablo için AUTO_INCREMENT değeri `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 --
 -- Tablo için AUTO_INCREMENT değeri `products`
 --
@@ -171,7 +176,7 @@ ALTER TABLE `products`
 -- Tablo için AUTO_INCREMENT değeri `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
