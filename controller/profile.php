@@ -17,9 +17,10 @@
               $firstName = $user->firstName;
               $lastName = $user->lastName;
               $email = $user->email;
+              $register_date=$user->register_date;
+              $img_url=$user->img_url;
           }
       }
   }
-
   require_once __DIR__ . '/../view/profile.phtml';
-  ?>
+?>

@@ -12,7 +12,7 @@ if($_POST){
         require_once __DIR__.'/../model/User.php';
 
         $email=$_POST['email'];
-
+        $register_date=date('Y-m-d');
         if(User::isExist($email)){
             echo "Bu email zaten alınmış.";
         }
@@ -24,7 +24,7 @@ if($_POST){
 
             $facebookID = $_POST['facebookID'];
 
-            $result = User::insert($firstName, $lastName, $email, $password, $signType, $facebookID);
+            $result = User::insert($firstName, $lastName, $email, $password, $signType, $facebookID, $register_date);
 
 
 

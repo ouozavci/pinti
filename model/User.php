@@ -16,6 +16,8 @@ require_once __DIR__ . '/db/db_connect.php';
         public $lastName;
         public $email;
         public $signType;
+        public $img_url;
+        public $register_date;
 
         public function getCustomerById($userid)
         {
@@ -30,18 +32,22 @@ require_once __DIR__ . '/db/db_connect.php';
                     $this->firstName = $result['firstName'];
                     $this->lastName = $result['lastName'];
                     $this->email = $result['email'];
+                    $this->img_url=$result['img_url'];
+                    $this->register_date=$result['register_date'];
                     //signType--------------------
                 }
             }
         }
 
-        public static function insert($firstName, $lastName, $email, $password, $signType, $facebookID)
+        public static function insert($firstName, $lastName, $email, $password, $signType, $facebookID, $register_date)
         {
 
             $db = new DB_CONNECT();
             $mysqli = $db->connect();
             $password = md5($password);
-            $result = mysqli_query($mysqli, "INSERT INTO users(firstName, lastName, email, password, signType, facebookID) VALUES ('$firstName','$lastName','$email','$password','$signType','$facebookID')");
+
+            $result = mysqli_query($mysqli, "INSERT INTO users(firstName, lastName, email, password, signType, facebookID, register_date) 
+                VALUES ('$firstName','$lastName','$email','$password','$signType','$facebookID','$register_date')");
             return $result;
 
         }
