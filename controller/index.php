@@ -6,13 +6,13 @@
  * Time: 12:44
  */
     session_start();
-    /*Session ba?lat?ld? ve session içerisinde kullan?c? bilgileri tutulmakta
-    kullan?c? giri? yapt?ktan sonra session içindeki isLogged de?eri true olmal?d?r ve
+    /*Session ba?lat?ld? ve session iï¿½erisinde kullan?c? bilgileri tutulmakta
+    kullan?c? giri? yapt?ktan sonra session iï¿½indeki isLogged de?eri true olmal?d?r ve
     id de?eri ise kullan?c?n?n id'si olmal?d?r.
-    A?a??daki kod parças? bunun kontrolünü yapmaktad?r.
-    E?er isLogged de?eri tan?ml? ve true ise session içerine kullan?c? id si ve username de?erleri girilir.
+    A?a??daki kod parï¿½as? bunun kontrolï¿½nï¿½ yapmaktad?r.
+    E?er isLogged de?eri tan?ml? ve true ise session iï¿½erine kullan?c? id si ve username de?erleri girilir.
 
-    Author: O?uzhan Özavc?
+    Author: O?uzhan ï¿½zavc?
     */
     if(isset($_SESSION['isLogged'])){
         if($_SESSION['isLogged']){
