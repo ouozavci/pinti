@@ -14,7 +14,7 @@ if($_POST){
         $email=$_POST['email'];
 
         if(User::isExist($email)){
-            echo "Bu email zaten alınmış";
+            echo "Bu email zaten alınmış.";
         }
         else {
             $firstName = $_POST['firstName'];
@@ -22,9 +22,9 @@ if($_POST){
             $password = $_POST['password'];
             $signType = $_POST['signType'];
 
-                $facebookID = $_POST['facebookID'];
+            $facebookID = $_POST['facebookID'];
 
-                $result = User::insert($firstName, $lastName, $email, $password, $signType, $facebookID);
+            $result = User::insert($firstName, $lastName, $email, $password, $signType, $facebookID);
 
 
 

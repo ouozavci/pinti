@@ -10,7 +10,8 @@ function checkPassword() {
 }
 function checkEmpty() {
     if (document.getElementById("txtPassword").value != "" && document.getElementById("txtPasswordAgain").value != "" &&
-        (document.getElementById("txtfirstName").value != "") && (document.getElementById("txtlastName").value !="") && (document.getElementById("txtEmail").value != "")) {
+        (document.getElementById("txtfirstName").value != "") && (document.getElementById("txtlastName").value !="") &&
+        (document.getElementById("txtEmail").value != "")) {
         return true;
     }
     else
