@@ -40,7 +40,10 @@
                                <button type="button" class="btn btn-primary">
                                    Profili Düzenle</button>
                            </div>
-                           <a href='../pinti'>AnaSayfaya Dön</a>
+                           <a href='<?php
+                                    require_once __DIR__.'/../model/Constants.php';
+                                    echo Constants::$serverUrl;
+                                        ?>'>AnaSayfaya Dön</a>
                        </div>
                    </div>
                </div>

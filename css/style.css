@@ -118,7 +118,7 @@ body .container{
     cursor: pointer;
 }
 #divSearch input[type=submit]:hover{
-    background-color: #aa132b;
+    background-color: black;
 }
 .faux-fb-btn button{
     border-radius: 5px;
