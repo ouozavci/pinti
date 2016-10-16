@@ -45,6 +45,20 @@
     <input type="submit" name="search" value="Getir">
 </form>
 </div>
+<div>
+    <ul>
+        <?php
+        require_once __DIR__."/../model/Category.php";
+            $result=Category::getCategoryByParentId(0);
+         while($entry=mysqli_fetch_array($result)){
+             echo "<li>".$entry["name"]."</li>";
+         }
+        ?>
+
+    </ul>
+
+</div>
+
 <div class="container">
     <nav class="navbar navbar-inverse">
 
