@@ -69,18 +69,27 @@
                                             class='img-responsive' alt='product 1'></a>                                        
                                         </div>";
 
-                                        //Alt Menüler
-                                        $subMenus = Category::getCategoryByParentId($entry["id"]);
-                                        while ($subMenu = mysqli_fetch_array($subMenus)){
-                                            echo "<li class='dropdown-header'>".$subMenu["name"]."</li>";
-                                        }
+
                                     echo "</div>
                                 </div>
                            </ul> 
-                        </li>".
-                       "</ul>" ;
+                        </li>";
+                                 //Alt Menüler
+                                 $subMenus = Category::getCategoryByParentId($entry["id"]);
+                                 $count = 2;
+                                 while ($subMenu = mysqli_fetch_array($subMenus)){
+                                     $count++;
+                                     if($count==3){
+                                         echo "<li class='col-sm-3'><ul>";
+                                     }
+                                     echo "<li class='dropdown-header'>".$subMenu["name"]."</li>";
+                                     if($count==3){
+                                         echo "</ul></li>";
+                                         $count=0;
+                                     }
+                                 }
 
-
+                    echo "</ul>" ;
              echo "</li>";
          }
         ?>
