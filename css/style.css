@@ -113,6 +113,7 @@ body .container{
     background-color: crimson;
     font-family: 'Open Sans', 'sans-serif';
     font-size: 12pt;
+    font-weight: bolder;
     color: white;
     border: 1px solid #ccc ;
     cursor: pointer;

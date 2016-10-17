@@ -28,7 +28,19 @@ class Category{
             }
         }
     }
+    public static function getCategoryImage($id){
+        $db = new DB_CONNECT();
+        $mysqli = $db->connect();
+        $result = mysqli_query($mysqli, "SELECT * FROM category_img where category_id = '$id'");
 
+        if(!empty($result)){
+            if(mysqli_num_rows($result) > 0){
+               $result = mysqli_fetch_array($result);
+               return $result['image_url'];
+            }
+        }
+
+    }
     public static function getCategoryByParentId($parent_id){
         $db = new DB_CONNECT();
         $mysqli = $db->connect();
