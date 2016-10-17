@@ -85,7 +85,10 @@
         </tr>
         <tr>
             <input type="hidden" name="signType" value="form"/>
-            <td><a href="../index.php"><label>Ana Sayfaya Dön</label></a></td>
+            <td><a href="<?php
+                            require_once __DIR__.'/../model/Constants.php';
+                            echo Constants::$serverUrl;
+                            ?>"><label>Ana Sayfaya Dön</label></a></td>
             <td><input type="button" name="btnSignin" value="Kayıt Ol" onClick="checkform()"></td>
                 <!--
                     Kayıt olurken belirtilen zorunlulukarın yerine getirilip getirilmediğinin kontrolu
