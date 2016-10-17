@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
+-- version 4.5.2
 -- http://www.phpmyadmin.net
 --
--- Anamakine: 127.0.0.1
--- Üretim Zamanı: 17 Eki 2016, 00:25:46
+-- Anamakine: localhost
+-- Üretim Zamanı: 17 Eki 2016, 20:08:08
 -- Sunucu sürümü: 10.1.16-MariaDB
 -- PHP Sürümü: 5.6.24
 
@@ -90,6 +90,29 @@ INSERT INTO `category` (`id`, `name`, `parent_id`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Tablo için tablo yapısı `category_img`
+--
+
+CREATE TABLE `category_img` (
+  `category_id` int(11) NOT NULL,
+  `image_url` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Tablo döküm verisi `category_img`
+--
+
+INSERT INTO `category_img` (`category_id`, `image_url`) VALUES
+(1, 'http://www.kadinlarportali.com/wp-content/uploads/2011/06/yeni-moda-sonbahar-giyimi.jpg'),
+(2, 'http://cdn.pocket-lint.com/r/s/970x/assets/images/php2ah0vp.jpg'),
+(3, 'http://blog.cms.gittigidiyor.com/wp-content/uploads/sites/13/2016/09/Evinizin-Havasini-Temizleyecek-12-Ev-Bitkisi-660x330.jpg'),
+(4, 'http://www.cengizyildiz.com.tr/plus/9.jpg'),
+(5, 'http://blog.cms.gittigidiyor.com/wp-content/uploads/sites/13/2016/03/Gitar-Alma-Rehberi-331x219.jpg'),
+(6, 'http://www.yesiltopuklar.com/wp-content/uploads/2012/12/Sa%C4%9Fl%C4%B1kl%C4%B1-Ya%C5%9Fam-ve-Kozmetik-%C3%9Cr%C3%BCnleri.jpg');
+
+-- --------------------------------------------------------
+
+--
 -- Tablo için tablo yapısı `products`
 --
 
@@ -134,7 +157,8 @@ INSERT INTO `users` (`id`, `firstName`, `lastName`, `email`, `password`, `phoneN
 (40, 'kaan', 'taş', 'afajshfajhfjahjha', '202cb962ac59075b964b07152d234b70', NULL, NULL, 'form', '', NULL, '0000-00-00'),
 (41, 'kaan', 'taş', 'kaan.tas.31@facebook.com', '25f9e794323b453885f5181f1b624d0b', NULL, NULL, 'form', '', NULL, '0000-00-00'),
 (43, 'doğukan', 'taş', 'dogukan_tas@hotmail.com', '25f9e794323b453885f5181f1b624d0b', NULL, NULL, 'form', '', NULL, '2016-10-16'),
-(44, 'kaan', 'a', 'asfafa@a.com', '25f9e794323b453885f5181f1b624d0b', NULL, NULL, 'form', '', NULL, '2016-10-17');
+(44, 'kaan', 'a', 'asfafa@a.com', '25f9e794323b453885f5181f1b624d0b', NULL, NULL, 'form', '', NULL, '2016-10-17'),
+(45, 'Oğuzhan', 'Özavcı', 'oguzhanozavci@anadolu.edu.tr', 'fae1a546f80b5422d7a99d72677ea04d', NULL, NULL, 'form', '', NULL, '2016-10-17');
 
 --
 -- Dökümü yapılmış tablolar için indeksler
@@ -145,6 +169,12 @@ INSERT INTO `users` (`id`, `firstName`, `lastName`, `email`, `password`, `phoneN
 --
 ALTER TABLE `category`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Tablo için indeksler `category_img`
+--
+ALTER TABLE `category_img`
+  ADD PRIMARY KEY (`category_id`);
 
 --
 -- Tablo için indeksler `products`
@@ -166,7 +196,7 @@ ALTER TABLE `users`
 -- Tablo için AUTO_INCREMENT değeri `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 --
 -- Tablo için AUTO_INCREMENT değeri `products`
 --
@@ -176,7 +206,7 @@ ALTER TABLE `products`
 -- Tablo için AUTO_INCREMENT değeri `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
