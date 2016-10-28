@@ -94,8 +94,11 @@
                                          echo "<li class='col-sm-3'><ul>";
                                      }
                                      echo "<li class='dropdown-header'>".$subMenu["name"]."</li>";
-                                            echo "<li><a href='#'>Alt 1</a><a href='#'>Alt 2</a>";
-                                            //echo "<li><a href='#'>Alt 2</a>";
+                                            $subsubMenus = Category::getCategoryByParentId($subMenu['id']);
+                                                if(!empty($subsubMenus))
+                                                while (($subsubMenu = mysqli_fetch_array($subsubMenus))){
+                                                    echo "<li><a href='#'>".$subsubMenu["name"]."</a>";
+                                                }
 
                                      if($count!=3)
                                               echo "<li class='divider'></li>";
