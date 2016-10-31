@@ -7,16 +7,24 @@
 require_once "../controller/session.php";
 require_once "common/header.phtml";
 require_once "../model/Category.php";
+
 ?>
 Ürün Adı: <textarea rows="2" cols="2"> </textarea>
 Ürün Fiyatı: <input type="text" name="price">
-Ürün Kategorisi: <select>
-    <option value="giyimayakkabi"><??></option>
-    <option value="elektronik">Elektronik</option>
-    <option value="evbahceofis">Ev,Bahçe,Ofis</option>
-    <option value="sporoutdoor">Spor&Outdoor</option>
-    <option value="hobieglencesanat">Hobi,Eğlence ve Sanat</option>
-    <option value="sporoutdoor">Spor&Outdoor</option>
+
+Ürün Kategorisi: <select name="firstcategory">
+    <? $menus = Category::getCategoryByParentId(0);
+        while($menu = mysqli_fetch_array($menus)){
+            echo "<option value='".$menu["id"]."'>".$menu["name"]."</option>";
+        }
+       ?>
 </select>
+Alt Ürün Kategorisi: <select name="secondcategory">
+    <?
+        
+    ?>
+</select>
+
+
 </body>
 </html>
