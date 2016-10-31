@@ -1,0 +1,25 @@
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="dist/css/bootstrap.css">
+</head>
+<body>
+<?
+require_once "common/header.phtml";
+require_once "../model/User.php";
+$seller = new User();
+$seller->getCustomerById($product['seller_id']);
+
+?>
+
+<table>
+    <tr>
+        <td rowspan="2"> <img src="<?= $product["image_url"]; ?>" width="250px" height="300px"/> </td>
+        <td> Ürün Fiyatı: <?= $product["price"]; ?> TL </td>
+    </tr>
+    <tr>
+        <td> Ürün Satıcısı: <?= $seller->firstName ." ".$seller->lastName ?> </td>
+    </tr>
+</table>
+</body>
+</html>

@@ -105,8 +105,8 @@ require_once "common/header.phtml"; ?>
                 
                 echo "
                 <tr>
-                    <td rowspan='2'><img src='".$product["image_url"]."' width='150px'/></td>
-                    <td>".$product["name"]."</td>
+                    <td rowspan='2'><a href ='show-product?id=".$product['id']."'><img src='".$product["image_url"]."' width='150px'/></a></td>
+                    <td><a href='show-product?id=".$product['id']."'>".$product["name"]."</td>
                 </tr>
                 <tr>
                     <td style='text-align:right;'>".$product["price"]." TL</td>
