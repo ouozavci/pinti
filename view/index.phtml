@@ -95,5 +95,18 @@ require_once "common/header.phtml"; ?>
         </div>
     </nav>
 </div>
+<div id="product-div">
+    <table>
+        <?
+            require_once "../model/Product.php";
+            $products = Product::getAll();
+
+            while ($product = mysqli_fetch_array($products)){
+                
+            }
+
+        ?>
+    </table>
+</div>
 </body>
 </html>
