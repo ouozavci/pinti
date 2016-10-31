@@ -1,6 +1,7 @@
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="dist/css/bootstrap.css">
 </head>
 <body>
 <?
@@ -8,6 +9,7 @@ require_once "../controller/session.php";
 require_once "common/header.phtml";
 require_once "../model/Category.php";
 ?>
+<div id="sell-form-content">
 Ürün Adı: <textarea rows="2" cols="2"> </textarea>
 Ürün Fiyatı: <input type="text" name="price">
 Ürün Kategorisi: <select>
@@ -18,5 +20,6 @@ require_once "../model/Category.php";
     <option value="hobieglencesanat">Hobi,Eğlence ve Sanat</option>
     <option value="sporoutdoor">Spor&Outdoor</option>
 </select>
+</div>
 </body>
 </html>
