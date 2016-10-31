@@ -12,13 +12,17 @@ $seller->getCustomerById($product['seller_id']);
 
 ?>
 
-<table>
+<table align="center">
     <tr>
-        <td rowspan="2"> <img src="<?= $product["image_url"]; ?>" width="250px" height="300px"/> </td>
-        <td> Ürün Fiyatı: <?= $product["price"]; ?> TL </td>
+        <td rowspan="3"> <img src="<?= $product["image_url"]; ?>" width="250px" height="300px"/> </td>
+        <td> <h2> <?= $product['name'] ?> </h2></td>
     </tr>
     <tr>
-        <td> Ürün Satıcısı: <?= $seller->firstName ." ".$seller->lastName ?> </td>
+        <td> Ürün Fiyatı: <?= $product["price"]; ?> TL </td>
+    </tr>
+
+    <tr>
+        <td> Ürün Satıcısı: <a href ='profile?userid=<?= $seller->id ?>'><?= $seller->firstName ." ".$seller->lastName ?></a> </td>
     </tr>
 </table>
 </body>
