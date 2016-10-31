@@ -96,13 +96,22 @@ require_once "common/header.phtml"; ?>
     </nav>
 </div>
 <div id="product-div">
-    <table>
+    <table align="center">
         <?
             require_once "../model/Product.php";
             $products = Product::getAll();
 
             while ($product = mysqli_fetch_array($products)){
                 
+                echo "
+                <tr>
+                    <td rowspan='2'><img src='".$product["image_url"]."' width='150px'/></td>
+                    <td>".$product["name"]."</td>
+                </tr>
+                <tr>
+                    <td style='text-align:right;'>".$product["price"]." TL</td>
+                </tr>;
+
             }
 
         ?>
