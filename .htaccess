@@ -8,3 +8,4 @@ RewriteRule ^profile$ controller/profile.php
 RewriteRule ^help$ controller/help.php
 RewriteRule ^products$ controller/list-products.php
 RewriteRule ^sell$ controller/sell-products.php
+RewriteRule ^show-product$ controller/show-product.php
