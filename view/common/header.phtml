@@ -1,0 +1,27 @@
+<div id="header">
+    <a href=""><img id="logo" align="left" src="img/logo.png" width="10%" alt="pinti.com"/></a>
+    <?php
+
+    if(!$_SESSION["isLogged"]) {
+        echo "       
+            <ul >
+                <li ><a href = 'signin' > Üye ol </a ></li >
+                <li ><a href = 'login'> Giriş yap </a ></li >
+                <li> <a href = 'products'> Ürünler </a></li>
+                <li ><a href = 'sell' > Ürün Sat </a ></li >
+                <li ><a href = 'help.phtml' > Yardım</a ></li >
+                <li ><a href = 'bilgilendirme/index.html' > Hakkında</a ></li >
+            </ul >";
+    }
+    else{
+        echo "
+            <ul >
+                <li><label>Hoşgeldin <a href='profile?userid=".$_SESSION['id']."'>".$_SESSION['username']."</a>.</label></li>
+                <li ><a href = 'sell' > Ürün Sat </a ></li >
+                <li ><a href = 'help' > Yardım</a ></li >
+                 <li ><a href = 'logout' > Çıkış yap </a ></li >
+            </ul >
+            " ;
+    }
+    ?>
+</div>

@@ -7,7 +7,4 @@ RewriteRule ^logout$ controller/logout.php
 RewriteRule ^profile$ controller/profile.php
 RewriteRule ^help$ controller/help.php
 RewriteRule ^products$ controller/list-products.php
-RewriteRule ^list-customers$ controllers/list-customers.php
-RewriteRule ^order-details$ controllers/order-details.php
-RewriteRule ^order-ship$ controllers/order-ship.php
-RewriteRule ^list-new-orders$ controllers/list-new-orders.php
+RewriteRule ^sell$ controller/sell-products.php
