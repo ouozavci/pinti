@@ -1,4 +1,4 @@
-<?
+<?php
 require_once "../model/Product.php";
 
 if($_GET) {
