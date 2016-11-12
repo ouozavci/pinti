@@ -1,8 +1,8 @@
 <?php
 require_once "../model/Category.php";
-if($_GET){
-    if(isset($_GET['id'])){
-        $id = $_GET['id'];
+if($_POST){
+    if(isset($_POST['id'])){
+        $id = $_POST['id'];
         $submenus = Category::getCategoryByParentId($id);
         $categories = array();
         $count=0;

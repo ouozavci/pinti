@@ -1,26 +1,52 @@
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="css/style.css">
-<link rel="stylesheet" type="text/css" href="dist/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="dist/css/bootstrap.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 </head>
 <body>
 <?php
 require_once "../controller/session.php";
 require_once "common/header.phtml";
 require_once "../model/Category.php";
-
 ?>
 <div id="sell-form-content">
-Ürün Adı: <textarea rows="2" cols="2"> </textarea>
-Ürün Fiyatı: <input type="text" name="price">
-
-Ürün Kategorisi: <select name="firstcategory">
-    <? $menus = Category::getCategoryByParentId(0);
-        while($menu = mysqli_fetch_array($menus)){
-            echo "<option value='".$menu["id"]."'>".$menu["name"]."</option>";
-        }
-       ?>
-</select>
+    <table align="center">
+        <tr>
+            <td>Ürün Adı:</td>
+            <td><input type="text" name="product_name"></td>
+        </tr>
+        <tr>
+            <td>Ürün Fiyatı:</td>
+            <td><input type="text" name="price"></td>
+        </tr>
+        <tr>
+            <td>Ürün Kategorisi:</td>
+            <td><select id="firstCategory">
+                    <?php $menus = Category::getCategoryByParentId(0);
+                    while ($menu = mysqli_fetch_array($menus)) {
+                        echo "<option value='" . $menu["id"] . "'>" . $menu["name"] . "</option>";
+                    }
+                    ?>
+                </select>
+            </td>
+            <td><select id="secondCategory" style=""></select></td>
+            <td><select id="thirdCategory" style=""></select></td>
+        </tr>
+    </table>
+    <script type="text/javascript">
+        $('#firstCategory').change(function () {
+            var selectedFirst  = $('#firstCategory').val();
+                $.post("<?php require_once "../model/Constants.php";
+                        echo Constants::$serverUrl; ?>/controller/getCategoryByJSON.php",
+                    {
+                        id: selectedFirst
+                    },
+                    function(data, status){
+                        alert("Data: " + data + "\nStatus: " + status);
+                    });
+        });
+    </script>
 </div>
 </body>
 </html>
