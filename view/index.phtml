@@ -4,10 +4,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="css/style.css"/>
 
+
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" type="text/css" href="dist/css/bootstrap.css">
     <!-- Custom styles for this template -->
-    <!link href="navbar.css" rel="stylesheet">
+    <link href="navbar.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/menubar.css"/>
     <!link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -19,103 +20,110 @@
 require_once "../controller/session.php";
 require_once "common/header.phtml"; ?>
 <div id="divSearch">
-<form action="search.php" method="get">
-    <input type="text" name="searchKey" placeholder="Ürün Arayın...">
-    <input type="submit" name="search" value="Getir">
-</form>
+    <form action="search.php" method="get">
+        <input type="text" name="searchKey" placeholder="Ürün Arayın...">
+        <input type="submit" name="search" value="Getir">
+    </form>
 </div>
 <div class="container">
     <nav class="navbar navbar-default">
         <div class="container-fluid">
-        <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse"
-                data-target="#myNavbar">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-            <label id="kategoriBaslk" class="navbar-brand">Kategoriler</label>
-             </div>
-        <div class="collapse navbar-collapse js-navbar-collapse" id="myNavbar">
-            <ul class="nav navbar-nav">
-        <?php
-        require_once __DIR__."/../model/Category.php";
-            $result=Category::getCategoryByParentId(0);
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse"
+                        data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <label id="kategoriBaslk" class="navbar-brand">Kategoriler</label>
+            </div>
+            <div class="collapse navbar-collapse js-navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <?php
+                    require_once __DIR__ . "/../model/Category.php";
+                    $result = Category::getCategoryByParentId(0);
 
 
-         while($entry=mysqli_fetch_array($result)){
-             echo "<li class='dropdown mega-dropdown'>".
-                 //Üst ana menü isimlerini yaz.
-                 "<a href='#' class='dropdown-toggle' data-toggle='dropdown'>".$entry["name"]."<span class='caret'></span></a>";
-                 echo "<ul class='dropdown-menu mega-dropdown-menu'>".
-                        "<li class='col-sm-3'>
+                    while ($entry = mysqli_fetch_array($result)) {
+                        echo "<li class='dropdown mega-dropdown'>" .
+                            //Üst ana menü isimlerini yaz.
+                            "<a href='#' class='dropdown-toggle' data-toggle='dropdown'>" . $entry["name"] . "<span class='caret'></span></a>";
+                        echo "<ul class='dropdown-menu mega-dropdown-menu'>" .
+                            "<li class='col-sm-3'>
                            <ul>
-                                <li class='dropdown-header'>".$entry["name"]."</li>
+                                <li class='dropdown-header'>" . $entry["name"] . "</li>
                                 <div id='menCollection' class='carousel slide' data-ride='carousel'>
                                     <div class='carousel-inner'>
                                         <div class='item active'>
-                                            <a href='#'><img src=".Category::getCategoryImage($entry["id"])."
+                                            <a href='#'><img src=" . Category::getCategoryImage($entry["id"]) . "
                                             class='img-responsive' alt='product 1'></a>                                        
                                         </div>";
-                                    echo "</div>
+                        echo "</div>
                                 </div>
                            </ul> 
                         </li>";
-                                 //Alt Menüler
-                                 $subMenus = Category::getCategoryByParentId($entry["id"]);
-                                 $count = 0;
-                                 while ($subMenu = mysqli_fetch_array($subMenus)){
-                                     $count++;
-                                     if($count==1){
-                                         echo "<li class='col-sm-3'><ul>";
-                                     }
-                                     echo "<li class='dropdown-header'>".$subMenu["name"]."</li>";
-                                            $subsubMenus = Category::getCategoryByParentId($subMenu['id']);
-                                                if(!empty($subsubMenus))
-                                                while (($subsubMenu = mysqli_fetch_array($subsubMenus))){
-                                                    echo "<li><a href='#'>".$subsubMenu["name"]."</a>";
-                                                }
+                        //Alt Menüler
+                        $subMenus = Category::getCategoryByParentId($entry["id"]);
+                        $count = 0;
+                        while ($subMenu = mysqli_fetch_array($subMenus)) {
+                            $count++;
+                            if ($count == 1) {
+                                echo "<li class='col-sm-3'><ul>";
+                            }
+                            echo "<li class='dropdown-header'>" . $subMenu["name"] . "</li>";
+                            $subsubMenus = Category::getCategoryByParentId($subMenu['id']);
+                            if (!empty($subsubMenus))
+                                while (($subsubMenu = mysqli_fetch_array($subsubMenus))) {
+                                    echo "<li><a href='#'>" . $subsubMenu["name"] . "</a>";
+                                }
 
-                                     if($count!=3)
-                                              echo "<li class='divider'></li>";
-                                     if($count==3){
-                                         echo "</ul></li>";
-                                         $count=0;
-                                     }
-                                 }
-                                 if($count!=0){
-                                     echo "</ul></li>";
-                                 }
-                    echo "</ul>" ;
-             echo "</li>";
-         }
-        ?>
-            </ul>
-        </div>
+                            if ($count != 3)
+                                echo "<li class='divider'></li>";
+                            if ($count == 3) {
+                                echo "</ul></li>";
+                                $count = 0;
+                            }
+                        }
+                        if ($count != 0) {
+                            echo "</ul></li>";
+                        }
+                        echo "</ul>";
+                        echo "</li>";
+                    }
+                    ?>
+                </ul>
+            </div>
         </div>
     </nav>
 </div>
-<div id="product-div">
-    <table align="center">
-        <?php
-            require_once "../model/Product.php";
-            $products = Product::getAll();
-
-            while ($product = mysqli_fetch_array($products)){
-                
-                echo "
-                <tr>
-                    <td rowspan='2'><a href ='show-product?id=".$product['id']."'><img src='".$product["image_url"]."' width='150px'/></a></td>
-                    <td><a href='show-product?id=".$product['id']."'>".$product["name"]."</td>
-                </tr>
-                <tr>
-                    <td style='text-align:right;'>".$product["price"]." TL</td>
-                </tr>";
-
-            }
-
-        ?>
-    </table>
+<?php $count = 3; ?>
+<div class="container">
+    <?php require_once "../model/Product.php";
+    $products = Product::getAll();
+    while ($product = mysqli_fetch_array($products)) {
+        if ($count == 3) {
+            echo "<div class=\"row\" style=\"margin-top:20px\">";
+            $count = 0;
+        }
+        echo "
+        <div class=\" col-sm-6 col-md-4\">
+            <div class=\"thumbnail\">
+                <img src='" . $product['image_url'] . "' style='width: 250px; height:250px' alt=\"...\">
+                <div class=\"caption\">
+                    <h3><a href='show-product?id=" . $product['id'] . "'>" . $product['name'] . "</a></h3>
+                    <p>" . $product['price'] . "TL</p>
+                </div>
+            </div>
+        </div>
+        ";
+        if ($count == 2) {
+            echo "</div>";
+        }
+        $count++;
+    } ?>
 </div>
+
+
 </body>
 </html>
+
