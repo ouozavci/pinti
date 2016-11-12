@@ -15,7 +15,7 @@
 
 </head>
 <body>
-<? 
+<?php
 require_once "../controller/session.php";
 require_once "common/header.phtml"; ?>
 <div id="divSearch">
@@ -97,7 +97,7 @@ require_once "common/header.phtml"; ?>
 </div>
 <div id="product-div">
     <table align="center">
-        <?
+        <?php
             require_once "../model/Product.php";
             $products = Product::getAll();
 

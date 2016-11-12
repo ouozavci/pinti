@@ -1,4 +1,4 @@
-<?
+<?php
 require_once "../model/Category.php";
 if($_GET){
     if(isset($_GET['id'])){
