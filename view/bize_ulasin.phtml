@@ -1,0 +1,114 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: oguz
+ * Date: 8.10.2016
+ * Time: 14:12
+ */?>
+<?php
+require_once "../controller/session.php";
+require_once "common/header.phtml"; ?>
+<html>
+<head>
+    <title>Yardım</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="css/help.css"/>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" type="text/css" href="dist/css/bootstrap.css">
+    <!-- Custom styles for this template -->
+    <!link href="navbar.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/menubar.css"/>
+    <!link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="row affix-row">
+    <div class="col-sm-3 col-md-2 affix-sidebar">
+        <div class="sidebar-nav">
+            <div class="navbar navbar-default" role="navigation">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <span class="visible-xs navbar-brand">Sidebar menu</span>
+                </div>
+                <div class="navbar-collapse collapse sidebar-navbar-collapse">
+                    <ul class="nav navbar-nav" id="sidenav01">
+                        <li class="active">
+                            <a href="#" data-toggle="collapse" data-target="#toggleDemo0" data-parent="#sidenav01" class="collapsed">
+                                <h4>
+                                    Yardım Paneli
+                                    <br>
+                                </h4>
+                            </a>
+                            <div class="collapse" id="toggleDemo0" style="height: 0px;">
+                                <ul class="nav nav-list">
+                                    <li><a href="/pinti">Ana Sayfaya Dön</a></li>
+                                    <li><a href="urun-islemleri">Ürün İşlemleri</a></li>
+                                    <li><a href="uyelik-islemleri">Üyelik İşlemleri</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="#" data-toggle="collapse" data-target="#toggleDemo" data-parent="#sidenav01" class="collapsed">
+                                <span class="glyphicon glyphicon-shopping-cart"></span> Ürün İşlemleri <span class="caret pull-right"></span>
+                            </a>
+                            <div class="collapse" id="toggleDemo" style="height: 0px;">
+                                <ul class="nav nav-list">
+                                    <li><a href="siparis">Nasıl Sipariş Veririm?</a></li>
+                                    <li><a href="satis">Nasıl Satış Yaparım?</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="#" data-toggle="collapse" data-target="#toggleDemo2" data-parent="#sidenav01" class="collapsed">
+                                <span class="glyphicon glyphicon-user"></span> Üyelik İşlemleri <span class="caret pull-right"></span>
+                            </a>
+                            <div class="collapse" id="toggleDemo2" style="height: 0px;">
+                                <ul class="nav nav-list">
+                                    <li><a href="kayit">Nasıl Kayıt Olurum?</a></li>
+                                    <li><a href="giris">Nasıl Giriş Yaparım?</a></li>
+                                    <li><a href="profil">Profilime Nasıl Bakarım?</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li><a href="bize_ulasin"><span class="glyphicon glyphicon-phone"></span> Bize Ulaşın</a></li>
+                        <li><a href="/pinti/bilgilendirme/index.html"><span class="glyphicon glyphicon-font"></span> Hakkımızda</a></li>
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-9 col-md-10 affix-content">
+        <div class="container">
+
+            <div class="page-header">
+                <h3><span class="glyphicon glyphicon-info-sign"></span> Bize Ulaşın</h3>
+            </div>
+
+            <table>
+                <tr>
+                    <td>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12264.121982698123!2d30.510625949999998!3d39.783871!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xa0b0432205d20bef!2sAnadolu+%C3%9Cniversitesi!5e0!3m2!1str!2str!4v1478977799497" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+                    </td>
+                    <td>
+
+                    </td>
+                    <td>
+                        <h3>Pinti.com</h3>
+                        <p>Eskişehir/Türkiye</p>
+                        <p>Tel: 0222 222 22 22</p>
+                        <p>Email: pinti@gmail.com</p>
+                    </td>
+                </tr>
+            </table>
+
+
+
+</body>
+</html>

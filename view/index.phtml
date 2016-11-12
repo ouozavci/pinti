@@ -16,7 +16,7 @@
 
 </head>
 <body>
-<?
+<?php
 require_once "../controller/session.php";
 require_once "common/header.phtml"; ?>
 <div id="divSearch">
@@ -96,40 +96,9 @@ require_once "common/header.phtml"; ?>
         </div>
     </nav>
 </div>
-
-
-<? /*$count=3; ?>
+<?php $count = 3; ?>
 <div class="container">
-    <? require_once "../model/Product.php";
-    $products = Product::getAll();
-    while ($product = mysqli_fetch_array($products)) {
-        if ($count == 3) {
-            echo "<div class='row'>";
-            $count = 0;
-        }
-        echo "
-                <div class='col-md-4'>
-                    <div class='product-item'>
-                        <div class='pi-img-wrapper'>
-                            <img src='" . $product['image_url'] . "' class='img-responsive' alt='ProductName'>
-                        </div>
-                        <h3><a href='show-product?id=" . $product['id'] . "'>" . $product['name'] . "</a></h3>
-                        <div class='pi-price'>" . $product['price'] . "TL</div>
-                        <a href='javascript:' class='btn add2cart'>Sepete Ekle</a>
-                        <div class='sticker sticker-new'></div>
-                    </div>
-                </div>
-                ";
-        if($count==2){ echo"</div>"; }
-        $count++;
-    }
-   */ ?>
-<!--</div> -->
-
-
-<? $count = 3; ?>
-<div class="container">
-    <? require_once "../model/Product.php";
+    <?php require_once "../model/Product.php";
     $products = Product::getAll();
     while ($product = mysqli_fetch_array($products)) {
         if ($count == 3) {
