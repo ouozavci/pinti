@@ -1,6 +1,8 @@
 body{
-    background-color: white;
+    font-family: 'Open Sans';
     text-align: center;
+    overflow-x: hidden;
+    background: #f1f1f1;
 }
 body .container{
     text-align: left;
@@ -134,3 +136,4 @@ body .container{
     background: #406093 url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yR/r/teE39sffXW8.png) no-repeat 10px;
     cursor: pointer;
 }
+
