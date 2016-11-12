@@ -23,6 +23,7 @@ require_once "../model/Category.php";
         <tr>
             <td>Ürün Kategorisi:</td>
             <td><select id="firstCategory">
+                    <option value="">Kategori Seçiniz..</option>
                     <?php $menus = Category::getCategoryByParentId(0);
                     while ($menu = mysqli_fetch_array($menus)) {
                         echo "<option value='" . $menu["id"] . "'>" . $menu["name"] . "</option>";
@@ -30,21 +31,52 @@ require_once "../model/Category.php";
                     ?>
                 </select>
             </td>
-            <td><select id="secondCategory" style=""></select></td>
-            <td><select id="thirdCategory" style=""></select></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><select id="secondCategory"></select></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><select id="thirdCategory"></select></td>
         </tr>
     </table>
     <script type="text/javascript">
         $('#firstCategory').change(function () {
-            var selectedFirst  = $('#firstCategory').val();
-                $.post("<?php require_once "../model/Constants.php";
-                        echo Constants::$serverUrl; ?>/controller/getCategoryByJSON.php",
-                    {
-                        id: selectedFirst
-                    },
-                    function(data, status){
-                        alert("Data: " + data + "\nStatus: " + status);
-                    });
+            var selectedFirst = $('#firstCategory').val();
+            $.post("<?php require_once "../model/Constants.php";
+                    echo Constants::$serverUrl; ?>/controller/getCategoryByJSON.php",
+                {
+                    id: selectedFirst
+                },
+                function (data) {
+                    var json = jQuery.parseJSON(data);
+                    var i = 0;
+                    var htmlOptions = "";
+                    while (i < json.length) {
+                        htmlOptions += "<option value='" + json[i].id + "'>" + json[i].name + "</option>";
+                        i++;
+                    }
+                    $('#secondCategory').html(htmlOptions);
+                });
+        });
+        $('#secondCategory').change(function () {
+            var selectedSecond = $('#secondCategory').val();
+            $.post("<?php require_once "../model/Constants.php";
+                    echo Constants::$serverUrl; ?>/controller/getCategoryByJSON.php",
+                {
+                    id: selectedSecond
+                },
+                function (data) {
+                    var json = jQuery.parseJSON(data);
+                    var i = 0;
+                    var htmlOptions = "";
+                    while (i < json.length) {
+                        htmlOptions += "<option value='" + json[i].id + "'>" + json[i].name + "</option>";
+                        i++;
+                    }
+                    $('#thirdCategory').html(htmlOptions);
+                });
         });
     </script>
 </div>
