@@ -10,80 +10,148 @@ header('content-type: text/html; charset=utf8');
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="dist/css/bootstrap.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 </head>
 <body>
 <?php
 require_once "common/header.phtml";
 ?>
 
-<?php
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-10 col-md-offset-1">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th><?php
+                        /*Sepeti listeleme*/
+                        if ( isset($_COOKIE['product']) ) {
+                            echo 'Sepetinizde (' . count($_COOKIE['product']) . ') tane ürün var.';
+                        }else{
+                            echo 'Sepetinizde ürün bulunmamaktadır.';
+                        }
+                        ?>
+                    </th>
+                    <th>Adet</th>
+                    <th class="text-center">Fiyat</th>
+                    <th class="text-center">Toplam</th>
+                    <th> </th>
+                </tr>
+                </thead>
+                <tbody>
 
-/* güvenlik */
-function guvenlik($par){
-    return htmlspecialchars(trim($par));
-}
-array_map('guvenlik', $_GET);
+                <?php
+                /* ürünlerim */
+                require_once "../model/Product.php";
+                require_once "../model/User.php";
 
-/* ürünlerim */
-$urunler = array(1,2,3,4,5);
+                /* güvenlik */
+                function guvenlik($par){
+                    return htmlspecialchars(trim($par));
+                }
+                array_map('guvenlik', $_GET);
+                $total_price=0;
+                /*Sepeti listeleme*/
+                if ( isset($_COOKIE['product']) ){
+                    foreach ( $_COOKIE['product'] as $urun => $val ){
+                        $id=$urun;
+                        $product = Product::getProductById($id);
+                        if(!empty($product))
+                            $product = mysqli_fetch_array($product);
+                        $product_name=$product["name"];
+                        $product_id=$product["id"];
+                        $product_price=$product["price"];
+                        $product_img=$product["image_url"];
+                        $seller = new User();
+                        $seller->getCustomerById($product['seller_id']);
+                        $seller_fullname=$seller->firstName." ".$seller->lastName;
+                        $seller_id=$seller->id;
 
-if ( isset($_GET['sepetim']) ){
+                        $total_price+=$product_price;
+                        echo '<tr>
+                                <td class="col-sm-8 col-md-6">
+                                    <div class="media">
+                                        <a class="thumbnail pull-left" href="show-product?id='.$product_id.'"> <img class="media-object" src="'.$product_img.'" style="width:180px; height:180px;"> </a>
+                                        <div class="media-body">
+                                            <h4 class="media-heading"><a href="show-product?id='.$product_id.'">'.$product_name.'</a></h4>
+                                            <span>Satıcı: </span><span class="text-success"><strong><a href="profile?userid='.$seller_id.'">'.$seller_fullname.'</a></strong></span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="col-sm-1 col-md-1" style="text-align: center">
+                                    <input type="text" class="form-control" id="adet"  value="1">
+                                </td>
+                                <td class="col-sm-1 col-md-1 text-center"><strong>'.$product_price.' TL</strong></td>
+                                <input type="hidden" value="'.$product_price.'" id="fiyat">
+                                <td class="col-sm-1 col-md-1 text-center" id="adetFiyat"><strong>'.$product_price.' TL</strong></td>
+                                <td class="col-sm-1 col-md-1">
+                                    <button type="button" class="btn btn-danger">
+                                        <span class="glyphicon glyphicon-remove"></span> <a href="?cikart='.$product_id.'" style="color:white; text-decoration:none;">Sepetten Çıkar</a>
+                                    </button>
+                                </td>
+                            </tr>';
+                    }
+                }
+                /* sepete ürün ekle */
+                if ( isset($_GET['ekle']) ){
+                    $id = $_GET['ekle'];
+                    setcookie('product['.$id.']', $id, time() + 86400);
+                    header('Location:'.$_SERVER['HTTP_REFERER']);
+                }
 
-    echo '<h2>Sepetiniz ('.count($_COOKIE['urun']).')</h2>';
-    if ( isset($_COOKIE['urun']) ){
-        foreach ( $_COOKIE['urun'] as $urun => $val ){
-            echo '<div style="border: 1px solid #ddd; padding: 10px; margin-bottom: 10px">
-					<h2>Ürün '.$urun.'</h2>
-					<p>burası ürün açıklaması :)</p>
-					<a href="?cikart='.$urun.'">[sepetten çıkart]</a>
-				</div>';
-        }
-    } else {
-        echo 'Şuan sepetinizde hiç ürün bulunmuyor!';
-    }
+                /* sepeti boşalt */
+                if ( isset($_GET['bosalt']) ){
+                    foreach ( $_COOKIE['product'] as $key => $val ){
+                        setcookie('product['.$key.']', $key, time() - 86400);
+                    }
+                    header('Location:'.$_SERVER['HTTP_REFERER']);
+                }
 
-} else {
+                /* sepetten ürün çıkart */
+                if ( isset($_GET['cikart']) ){
+                    setcookie('product['.$_GET['cikart'].']', $_GET['cikart'], time() - 86400);
+                    header('Location:'.$_SERVER['HTTP_REFERER']);
+                }
+                ?>
 
-    /* sepette kaç tane ürün var? */
-    if ( isset($_COOKIE['urun']) ){
-        echo 'Şuan sepetinizde <strong>('.count($_COOKIE['urun']).') ürün</strong> bulunuyor! <a href="?sepetim=true">[Sepetimi Göster]</a> / <a href="?bosalt=true">[Sepeti Boşalt]</a>';
-    } else {
-        echo 'Şuan sepetinizde hiç ürün bulunmuyor!';
-    }
+                <tr>
+                    <td>   </td>
+                    <td>   </td>
+                    <td>   </td>
+                    <td><h3>Genel Toplam</h3></td>
+                    <td class="text-right">
+                        <?php
+                            echo "<h3><strong>".$total_price." TL</strong></h3>";
+                        ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>   </td>
+                    <td>   </td>
+                    <td>   </td>
+                    <td>
+                        <button type="button" class="btn btn-default">
+                            <span class="glyphicon glyphicon-shopping-cart"></span>
+                            <a href="<?php require_once "../model/Constants.php"; ?>" style="color:black; text-decoration:none; ">Alışverişe Devam Et</a>
+                        </button></td>
+                    <td>
+                        <button type="button" class="btn btn-success">
+                            Alışverişi Tamamla <span class="glyphicon glyphicon-play"></span>
+                        </button></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
-    /* ürünleri listeleyelim */
-    foreach ( $urunler as $urun ){
-        echo '<div style="border: 1px solid #ddd; padding: 10px; margin-bottom: 10px">
-				<h2>Ürün '.$urun.'</h2>
-				<p>burası ürün açıklaması :)</p>
-				'.(isset($_COOKIE['urun'][$urun]) ? '<a href="?cikart='.$urun.'">[sepetten çıkart]</a>' : '<a href="?ekle='.$urun.'">[sepete ekle]</a>').'
-			</div>';
-    }
-
-}
-
-/* sepete ürün ekle */
-if ( isset($_GET['ekle']) ){
-    $id = $_GET['ekle'];
-    setcookie('urun['.$id.']', $id, time() + 86400);
-    header('Location:'.$_SERVER['HTTP_REFERER']);
-}
-
-/* sepeti boşalt */
-if ( isset($_GET['bosalt']) ){
-    foreach ( $_COOKIE['urun'] as $key => $val ){
-        setcookie('urun['.$key.']', $key, time() - 86400);
-    }
-    header('Location:'.$_SERVER['HTTP_REFERER']);
-}
-
-/* sepetten ürün çıkart */
-if ( isset($_GET['cikart']) ){
-    setcookie('urun['.$_GET['cikart'].']', $_GET['cikart'], time() - 86400);
-    header('Location:'.$_SERVER['HTTP_REFERER']);
-}
-
-?>
-
+<script>
+    $('body').on('change','#adet',function () {
+        var adet=$('#adet').val();
+        var fiyat=$('#fiyat').val();
+        var result=adet*fiyat;
+        $('#adetFiyat').html("<strong>"+result+" TL</strong>");
+    });
+</script>
 </body>
 </html>
