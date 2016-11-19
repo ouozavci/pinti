@@ -5,6 +5,10 @@
     echo Constants::$serverUrl;
     ?>"><img id="logo" align="left" src="img/logo.png" width="10%" alt="pinti.com"/></a>
     <?php
+    $product_count=0;
+    if(isset($_COOKIE['product'])){
+        $product_count=count($_COOKIE['product']);
+    }
 
     if(!$_SESSION["isLogged"]) {
         echo "       
@@ -14,7 +18,7 @@
                 <li ><a href = 'sell' > Ürün Sat </a ></li >
                 <li ><a href = 'help' > Yardım</a ></li >
                 <li ><a href = 'bilgilendirme/index.html' > Hakkında</a ></li >
-                <li ><a href = 'sepet'> Sepet (".count($_COOKIE['product']).")</a ></li >
+                <li ><a href = 'sepet'> Sepet (".$product_count.")</a ></li >
             </ul >";
     }
     else{
@@ -24,7 +28,7 @@
                 <li ><a href = 'sell' > Ürün Sat </a ></li >
                 <li ><a href = 'help' > Yardım</a ></li >
                 <li ><a href = 'bilgilendirme/index.html' > Hakkında</a ></li >
-                <li ><a href = 'sepet'> Sepet (".count($_COOKIE['product']).")</a ></li >
+                <li ><a href = 'sepet'> Sepet (".$product_count.")</a ></li >
                  <li ><a href = 'logout' > Çıkış yap </a ></li >
                  
             </ul >
