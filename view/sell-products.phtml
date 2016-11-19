@@ -15,7 +15,6 @@ require_once "../model/Category.php";
         <tr id="categoryRow">
             <td>Ürün Kategorisi:</td>
             <td><select size='10' id="firstCategory">
-                    <option value="">Kategori Seçiniz..</option>
                     <?php $menus = Category::getCategoryByParentId(0);
                     while ($menu = mysqli_fetch_array($menus)) {
                         echo "<option value='" . $menu["id"] . "'>" . $menu["name"] . "</option>";
@@ -28,10 +27,14 @@ require_once "../model/Category.php";
 
 </div>
 <script type="text/javascript">
+
+    var ProductCategoryID;
+
     $('#firstCategory').change(function () {
 
         $('#secondCategory').remove();
         $('#thirdCategory').remove();
+        $('#btnContinue').remove();
 
         var selectedFirst = $('#firstCategory').val();
         $.post("<?php require_once "../model/Constants.php";
@@ -40,22 +43,31 @@ require_once "../model/Category.php";
                 id: selectedFirst
             },
             function (data) {
-                var json = jQuery.parseJSON(data);
-                var i = 0;
-                var htmlOptions = "<select size='10' id='secondCategory'>";
-                while (i < json.length) {
-                    htmlOptions += "<option value='" + json[i].id + "'>" + json[i].name + "</option>";
-                    i++;
+
+                if(data==='no such category'){
+                    ProductCategoryID = selectedFirst;
+                    addContinue();
                 }
-                htmlOptions+="</select>";
+                else {
+                    var json = jQuery.parseJSON(data);
+                    var i = 0;
+                    var htmlOptions = "<select size='10' id='secondCategory'>";
+                    while (i < json.length) {
+                        htmlOptions += "<option value='" + json[i].id + "'>" + json[i].name + "</option>";
+                        i++;
+                    }
+                    htmlOptions += "</select>";
 
 
-                $('#categoryRow').append(htmlOptions);
+                    $('#categoryRow').append(htmlOptions);
+
+                }
             });
     });
     $('body').on('change','#secondCategory',function () {
 
         $('#thirdCategory').remove();
+        $('#btnContinue').remove();
 
         var selectedSecond = $('#secondCategory').val();
 
@@ -65,17 +77,37 @@ require_once "../model/Category.php";
                 id: selectedSecond
             },
             function (data) {
-                var json = jQuery.parseJSON(data);
-                var i = 0;
-                var htmlOptions = "<select size='10' id='thirdCategory'>";
-                while (i < json.length) {
-                    htmlOptions += "<option value='" + json[i].id + "'>" + json[i].name + "</option>";
-                    i++;
+
+                if(data==='no such category'){
+                    ProductCategoryID = selectedSecond;
+                    addContinue();
                 }
-                htmlOptions+="</select>";
-                $('#categoryRow').append(htmlOptions);
+                else {
+                    var json = jQuery.parseJSON(data);
+                    var i = 0;
+                    var htmlOptions = "<select size='10' id='thirdCategory'>";
+                    while (i < json.length) {
+                        htmlOptions += "<option value='" + json[i].id + "'>" + json[i].name + "</option>";
+                        i++;
+                    }
+                    htmlOptions += "</select>";
+
+
+                    $('#categoryRow').append(htmlOptions);
+
+                }
             });
     });
+    $('body').on('change','#thirdCategory',function () {
+        var selectedThird = $('#thirdCategory').val();
+        ProductCategoryID = selectedThird;
+        addContinue();
+    });
+        function addContinue() {
+            var btnContinue = "<input id='btnContinue' type='button' value='Devam'/>"
+            $('#categoryRow').append(btnContinue);
+        }
+
 </script>
 </body>
 </html>
