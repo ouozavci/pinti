@@ -17,3 +17,4 @@ RewriteRule ^kayit$ controller/kayit.php
 RewriteRule ^profil$ controller/profil.php
 RewriteRule ^satis$ controller/satis.php
 RewriteRule ^siparis$ controller/siparis.php
+RewriteRule ^sepet$ controller/sepet.php
