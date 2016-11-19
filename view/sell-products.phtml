@@ -12,17 +12,9 @@ require_once "../model/Category.php";
 ?>
 <div id="sell-form-content">
     <table align="center">
-        <tr>
-            <td>Ürün Adı:</td>
-            <td><input type="text" name="product_name"></td>
-        </tr>
-        <tr>
-            <td>Ürün Fiyatı:</td>
-            <td><input type="text" name="price"></td>
-        </tr>
-        <tr>
+        <tr id="categoryRow">
             <td>Ürün Kategorisi:</td>
-            <td><select id="firstCategory">
+            <td><select size='10' id="firstCategory">
                     <option value="">Kategori Seçiniz..</option>
                     <?php $menus = Category::getCategoryByParentId(0);
                     while ($menu = mysqli_fetch_array($menus)) {
@@ -32,53 +24,58 @@ require_once "../model/Category.php";
                 </select>
             </td>
         </tr>
-        <tr>
-            <td></td>
-            <td><select id="secondCategory"></select></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td><select id="thirdCategory"></select></td>
-        </tr>
     </table>
-    <script type="text/javascript">
-        $('#firstCategory').change(function () {
-            var selectedFirst = $('#firstCategory').val();
-            $.post("<?php require_once "../model/Constants.php";
-                    echo Constants::$serverUrl; ?>/controller/getCategoryByJSON.php",
-                {
-                    id: selectedFirst
-                },
-                function (data) {
-                    var json = jQuery.parseJSON(data);
-                    var i = 0;
-                    var htmlOptions = "";
-                    while (i < json.length) {
-                        htmlOptions += "<option value='" + json[i].id + "'>" + json[i].name + "</option>";
-                        i++;
-                    }
-                    $('#secondCategory').html(htmlOptions);
-                });
-        });
-        $('#secondCategory').change(function () {
-            var selectedSecond = $('#secondCategory').val();
-            $.post("<?php require_once "../model/Constants.php";
-                    echo Constants::$serverUrl; ?>/controller/getCategoryByJSON.php",
-                {
-                    id: selectedSecond
-                },
-                function (data) {
-                    var json = jQuery.parseJSON(data);
-                    var i = 0;
-                    var htmlOptions = "";
-                    while (i < json.length) {
-                        htmlOptions += "<option value='" + json[i].id + "'>" + json[i].name + "</option>";
-                        i++;
-                    }
-                    $('#thirdCategory').html(htmlOptions);
-                });
-        });
-    </script>
+
 </div>
+<script type="text/javascript">
+    $('#firstCategory').change(function () {
+
+        $('#secondCategory').remove();
+        $('#thirdCategory').remove();
+
+        var selectedFirst = $('#firstCategory').val();
+        $.post("<?php require_once "../model/Constants.php";
+                echo Constants::$serverUrl; ?>/controller/getCategoryByJSON.php",
+            {
+                id: selectedFirst
+            },
+            function (data) {
+                var json = jQuery.parseJSON(data);
+                var i = 0;
+                var htmlOptions = "<select size='10' id='secondCategory'>";
+                while (i < json.length) {
+                    htmlOptions += "<option value='" + json[i].id + "'>" + json[i].name + "</option>";
+                    i++;
+                }
+                htmlOptions+="</select>";
+
+
+                $('#categoryRow').append(htmlOptions);
+            });
+    });
+    $('body').on('change','#secondCategory',function () {
+
+        $('#thirdCategory').remove();
+
+        var selectedSecond = $('#secondCategory').val();
+
+        $.post("<?php require_once "../model/Constants.php";
+                echo Constants::$serverUrl; ?>/controller/getCategoryByJSON.php",
+            {
+                id: selectedSecond
+            },
+            function (data) {
+                var json = jQuery.parseJSON(data);
+                var i = 0;
+                var htmlOptions = "<select size='10' id='thirdCategory'>";
+                while (i < json.length) {
+                    htmlOptions += "<option value='" + json[i].id + "'>" + json[i].name + "</option>";
+                    i++;
+                }
+                htmlOptions+="</select>";
+                $('#categoryRow').append(htmlOptions);
+            });
+    });
+</script>
 </body>
 </html>
