@@ -9,11 +9,19 @@
 require_once "../controller/session.php";
 require_once "common/header.phtml";
 require_once "../model/Category.php";
+require_once "../model/Constants.php";
+
+    if(!$_SESSION['isLogged']){
+        header('Location: '.Constants::$serverUrl."/login");
+    }
 ?>
+<div id="content">
 <div id="sell-form-content">
-    <table align="center">
+    <table align="left">
+        <tr>
+            <td><h4>Ürün Kategorisi:</h4></td>
+        </tr>
         <tr id="categoryRow">
-            <td>Ürün Kategorisi:</td>
             <td><select size='10' id="firstCategory">
                     <?php $menus = Category::getCategoryByParentId(0);
                     while ($menu = mysqli_fetch_array($menus)) {
@@ -24,7 +32,7 @@ require_once "../model/Category.php";
             </td>
         </tr>
     </table>
-
+</div>
 </div>
 <script type="text/javascript">
 
@@ -43,8 +51,7 @@ require_once "../model/Category.php";
                 id: selectedFirst
             },
             function (data) {
-
-                if(data==='no such category'){
+                if (data === 'no such category') {
                     ProductCategoryID = selectedFirst;
                     addContinue();
                 }
@@ -58,27 +65,23 @@ require_once "../model/Category.php";
                     }
                     htmlOptions += "</select>";
 
-
                     $('#categoryRow').append(htmlOptions);
-
                 }
             });
     });
-    $('body').on('change','#secondCategory',function () {
+    $('body').on('change', '#secondCategory', function () {
 
         $('#thirdCategory').remove();
         $('#btnContinue').remove();
 
         var selectedSecond = $('#secondCategory').val();
 
-        $.post("<?php require_once "../model/Constants.php";
-                echo Constants::$serverUrl; ?>/controller/getCategoryByJSON.php",
+        $.post("<? echo Constants::$serverUrl; ?>/controller/getCategoryByJSON.php",
             {
                 id: selectedSecond
             },
             function (data) {
-
-                if(data==='no such category'){
+                if (data === 'no such category') {
                     ProductCategoryID = selectedSecond;
                     addContinue();
                 }
@@ -92,22 +95,43 @@ require_once "../model/Category.php";
                     }
                     htmlOptions += "</select>";
 
-
                     $('#categoryRow').append(htmlOptions);
-
                 }
             });
     });
-    $('body').on('change','#thirdCategory',function () {
+    $('body').on('change', '#thirdCategory', function () {
         var selectedThird = $('#thirdCategory').val();
         ProductCategoryID = selectedThird;
         addContinue();
     });
-        function addContinue() {
-            var btnContinue = "<input id='btnContinue' type='button' value='Devam'/>"
-            $('#categoryRow').append(btnContinue);
-        }
+    function addContinue() {
+        var btnContinue = "<input id='btnContinue' type='button' value='Devam'/>"
+        $('#categoryRow').append(btnContinue);
+    }
+    $('body').on('click', '#btnContinue', function () {
+        $('#sell-form-content').remove();
+        $('#content').load("view/sell-products-content/product-details.html");
+    });
+    $('body').on('click','#btnSell', function () {
+        var name=$('#product_name').val();
+        var price=$('#product_price').val();
+        var image_url=$('#product_image').val();
 
+        $.post("<?php require_once "../model/Constants.php";
+            echo Constants::$serverUrl; ?>/controller/insertProduct.php",
+            {
+                name: name,
+                price: price,
+                category_id: ProductCategoryID,
+                brand_id: 0,
+                seller_id: <? echo $_SESSION['id']?>,
+                image_url: image_url
+            },function (data) {
+                alert(data);
+            }
+        )
+
+    })
 </script>
 </body>
 </html>

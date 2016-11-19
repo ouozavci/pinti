@@ -38,4 +38,11 @@ class Product
         $result = mysqli_query($mysqli,"SELECT * FROM products where category_id='$category_id'");
         return $result;
     }
+    public static function insertProduct($name,$price,$category_id,$seller_id,$image_url){
+        $db = new DB_CONNECT();
+        $mysqli = $db->connect();
+        $result = mysqli_query($mysqli,"INSERT INTO products (name,price,category_id,brand_id,seller_id,image_url)
+                                        VALUES ('$name','$price','$category_id','0','$seller_id','$image_url');");
+        return $result;
+    }
 }
