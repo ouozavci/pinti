@@ -47,7 +47,23 @@ $seller->getCustomerById($product['seller_id']);
 
                     <div class="action">
                         <p class="product-description">Ürün Satıcısı:<a href ='profile?userid=<?= $seller->id ?>'><?= $seller->firstName ." ".$seller->lastName ?></a> </p>
-                        <button class="add-to-cart btn btn-default" type="button">Sepete Ekle</button>
+
+
+                        <button class="add-to-cart btn btn-default" type="button">
+                            <?php
+                                $product_id=$product["id"];
+                                echo"
+                                    <a href='sepet?ekle=$product_id' style='color:white; text-decoration:none;'>Sepete Ekle</a>
+                                ";
+
+                            /* sepete ürün ekle */
+                            if ( isset($_GET['ekle']) ){
+                                $id = $_GET['ekle'];
+                                setcookie('product['.$id.']', $id, time() + 86400);
+                                header('Location:'.$_SERVER['HTTP_REFERER']);
+                            }
+                            ?>
+                        </button>
                     </div>
                 </div>
             </div>
