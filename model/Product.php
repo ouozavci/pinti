@@ -48,8 +48,7 @@ class Product
     public static function getChildsOf($category_id){
         $db = new DB_CONNECT();
         $mysqli = $db->connect();
-        require_once "Category.php";
-        $childs = Category::getCategoryByParentId($category_id);
+        $childs = mysqli_query($mysqli, "SELECT * FROM category where parent_id='$category_id'");
 
         $sqlString = "SELECT * FROM products where category_id='$category_id'";
 
@@ -59,6 +58,7 @@ class Product
             }
           //  echo $sqlString;
         $result = mysqli_query($mysqli,$sqlString);
+        $db = null;
         return $result;
     }
 }
