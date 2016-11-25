@@ -6,5 +6,7 @@
  * Time: 15:44
  */
 class Constants{
-    public static $serverUrl="http://localhost/pinti/"/*"http://pinti.16mb.com"*/;
+
+    public static $serverUrl="http://localhost/pinti"/*"http://pinti.16mb.com"*/;
+    
 }
