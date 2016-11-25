@@ -13,12 +13,12 @@ class Category{
     public $name;
     public $parent_id;
 
-    public function getCategoryById($id){
+    public static function getCategoryById($id){
         $db = new DB_CONNECT();
         $mysqli = $db->connect();
         $result = mysqli_query($mysqli, "SELECT * FROM category where id='$id'");
 
-        if (!empty($result)) {
+     /*   if (!empty($result)) {
             if (mysqli_num_rows($result) > 0) {
                 $result = mysqli_fetch_array($result);
 
@@ -26,7 +26,8 @@ class Category{
                 $this->name = $result['name'];
                 $this->parent_id = $result['parent_id'];
             }
-        }
+        }*/
+        return $result;
     }
     public static function getCategoryImage($id){
         $db = new DB_CONNECT();

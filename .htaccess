@@ -1,6 +1,7 @@
 RewriteEngine On
 
 RewriteRule ^$ controller/index.php
+RewriteRule ^([0-9]+) controller/index.php?cat=$1
 RewriteRule ^signin$ controller/signin.php
 RewriteRule ^login$ controller/login.php
 RewriteRule ^logout$ controller/logout.php
