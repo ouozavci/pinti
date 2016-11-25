@@ -18,6 +18,8 @@ require_once __DIR__ . '/db/db_connect.php';
         public $signType;
         public $img_url;
         public $register_date;
+        public $phonenumber;
+        public $address;
 
         public function getCustomerById($userid)
         {
@@ -34,6 +36,8 @@ require_once __DIR__ . '/db/db_connect.php';
                     $this->email = $result['email'];
                     $this->img_url=$result['img_url'];
                     $this->register_date=$result['register_date'];
+                    $this->phonenumber = $result['phoneNumber'];
+                    $this->address = $result['address'];
                     //signType--------------------
                 }
             }
@@ -116,9 +120,9 @@ require_once __DIR__ . '/db/db_connect.php';
             }
         }
 
-        public static function updateProfile($id,$phoneNumber,$address){
+        public static function updateProfile($id,$phoneNumber,$address,$imageurl){
             $db = new DB_CONNECT();
             $mysqli = $db->connect();
-            $result = mysqli_query($mysqli, "UPDATE users SET phoneNumber='$phoneNumber', address='$address' WHERE id='$id'");
+            $result = mysqli_query($mysqli, "UPDATE users SET phoneNumber='$phoneNumber', address='$address' , img_url='$imageurl' WHERE id='$id'");
         }
     }

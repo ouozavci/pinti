@@ -22,10 +22,13 @@ require_once "common/header.phtml";
 <td>E-Mail Adresiniz: <input type="text" name="email" value="<?=$user->email ?>"></td>
         </tr>
         <tr>
-<td>Telefon Numaranız: <input type="text" name="phonenumber"></td>
+<td>Telefon Numaranız: <input type="text" name="phonenumber" value="<?=$user->phonenumber?>"
         </tr>
         <tr>
-<td>Adresiniz: <textarea rows="4" cols="50" name="address"> </textarea></td>
+<td>Adresiniz: <textarea rows="4" cols="50" name="address"><?=$user->address?> </textarea></td>
+        </tr>
+        <tr>
+            <td>Fotoğrafınızın URL'si:  <input type="text" name="imageurl" value="<?=$user->img_url?>"></td>
         </tr>
         <tr>
 <td><input type="submit" name="kaydet" value="Bilgileri Kaydet"></td>

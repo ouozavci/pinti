@@ -19,6 +19,8 @@
               $email = $user->email;
               $register_date=$user->register_date;
               $img_url=$user->img_url;
+              $phonenumber = $user->phonenumber;
+              $address = $user->address;
           }
       }
   }

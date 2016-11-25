@@ -12,7 +12,9 @@ if($_GET) {
 if($_POST){
     if(isset($_GET['userid'])) {
         $userid = $_GET['userid'];
-        User::updateProfile($userid,$_POST['phonenumber'],$_POST['address']);
+        User::updateProfile($userid,$_POST['phonenumber'],$_POST['address'],$_POST['imageurl']);
+        header("Location: http://localhost/pinti/profile?userid=$userid");
+        die();
     }
 
 }
