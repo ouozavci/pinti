@@ -13,23 +13,23 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="css/carousel.css"/>
     <script>
-        $(document).ready( function() {
+        $(document).ready(function () {
             $('#myCarousel').carousel({
-                interval:   4000
+                interval: 4000
             });
 
             var clickEvent = false;
-            $('#myCarousel').on('click', '.nav a', function() {
+            $('#myCarousel').on('click', '.nav a', function () {
                 clickEvent = true;
                 $('.nav li').removeClass('active');
                 $(this).parent().addClass('active');
-            }).on('slid.bs.carousel', function(e) {
-                if(!clickEvent) {
-                    var count = $('.nav').children().length -1;
+            }).on('slid.bs.carousel', function (e) {
+                if (!clickEvent) {
+                    var count = $('.nav').children().length - 1;
                     var current = $('.nav li.active');
                     current.removeClass('active').next().addClass('active');
                     var id = parseInt(current.data('slide-to'));
-                    if(count == id) {
+                    if (count == id) {
                         $('.nav li').first().addClass('active');
                     }
                 }
@@ -93,11 +93,11 @@ require_once "common/header.phtml"; ?>
                             if ($count == 1) {
                                 echo "<li class='col-sm-3'><ul>";
                             }
-                            echo "<li class='dropdown-header'><a href ='".$subMenu['id']."'>" . $subMenu["name"] . "</a></li>";
+                            echo "<li class='dropdown-header'><a href ='" . $subMenu['id'] . "'>" . $subMenu["name"] . "</a></li>";
                             $subsubMenus = Category::getCategoryByParentId($subMenu['id']);
                             if (!empty($subsubMenus))
                                 while (($subsubMenu = mysqli_fetch_array($subsubMenus))) {
-                                    echo "<li><a href='".$subsubMenu['id']."'>" . $subsubMenu["name"] . "</a>";
+                                    echo "<li><a href='" . $subsubMenu['id'] . "'>" . $subsubMenu["name"] . "</a>";
                                 }
 
                             if ($count != 3)
@@ -120,8 +120,8 @@ require_once "common/header.phtml"; ?>
     </nav>
 </div>
 <?
-if($cat2show == 0)
-echo '
+if ($cat2show == 0)
+    echo '
 <!-- Carousel -->
 <div class="container">
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -164,7 +164,7 @@ echo '
 </div>';
 else echo "
 <div>
-    <h1 style=\"color:crimson; font-family: 'Times New Roman'\">".mysqli_fetch_array(Category::getCAtegoryById($cat2show))['name']."</h1>
+    <h1 style=\"color:crimson; font-family: 'Times New Roman'\">" . mysqli_fetch_array(Category::getCAtegoryById($cat2show))['name'] . "</h1>
 </div>
 ";
 ?>
@@ -173,16 +173,17 @@ else echo "
 <?php $count = 3; ?>
 <div class="container">
     <?php require_once "../model/Product.php";
-    if($cat2show == 0)
-    $products = Product::getAll();
+    if ($cat2show == 0)
+        $products = Product::getAll();
     else
-    $products = Product::getChildsOf($cat2show);
-    while ($product = mysqli_fetch_array($products)) {
-        if ($count == 3) {
-            echo "<div class=\"row\" style=\"margin-top:20px\">";
-            $count = 0;
-        }
-        echo "
+        $products = Product::getChildsOf($cat2show);
+    if (mysqli_num_rows($products) > 0) {
+        while ($product = mysqli_fetch_array($products)) {
+            if ($count == 3) {
+                echo "<div class=\"row\" style=\"margin-top:20px\">";
+                $count = 0;
+            }
+            echo "
         <div class=\" col-sm-6 col-md-4\">
             <div class=\"thumbnail\">
                 <img src='" . $product['image_url'] . "' style='width: 250px; height:250px' alt=\"...\">
@@ -193,11 +194,28 @@ else echo "
             </div>
         </div>
         ";
-        if ($count == 2) {
-            echo "</div>";
+            if ($count == 2) {
+                echo "</div>";
+            }
+            $count++;
         }
-        $count++;
-    } ?>
+    } else {
+        echo "
+        <table align='center'>
+            <tr>
+                 <td>      
+                 <img src='http://educationnews.educationviewsor.netdna-cdn.com/wp-content/uploads/2013/10/ooops-sign.jpg'>
+                 </td>
+            </tr>
+            <tr>
+                 <td>     
+                 <h4 align='center'>Bu kategoride satışa sunulmuş ürün bulunmamaktadır.</h4>
+                 </td>
+            </tr>
+        </table>
+        ";
+    }
+    ?>
 </div>
 
 
