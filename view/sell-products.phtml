@@ -2,6 +2,7 @@
 <head>
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="dist/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/sell_products.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 </head>
 <body>
@@ -15,24 +16,32 @@ require_once "../model/Constants.php";
         header('Location: '.Constants::$serverUrl."/login");
     }
 ?>
+
+
+
 <div id="content">
-<div id="sell-form-content">
-    <table align="left">
-        <tr>
-            <td><h4>Ürün Kategorisi:</h4></td>
-        </tr>
-        <tr id="categoryRow">
-            <td><select size='10' id="firstCategory">
-                    <?php $menus = Category::getCategoryByParentId(0);
-                    while ($menu = mysqli_fetch_array($menus)) {
-                        echo "<option value='" . $menu["id"] . "'>" . $menu["name"] . "</option>";
-                    }
-                    ?>
-                </select>
-            </td>
-        </tr>
-    </table>
-</div>
+    <div class="container">
+
+        <div id="sell-form-content">
+            <div class="col-md-12">
+                <center><h2>Satmak İstediğiniz Ürünün Kategorisini Seçiniz</h2></center><hr>
+                <div class="form-group">
+                    <table align="left">
+
+                        <tr id="categoryRow">
+                            <td><select class="form-control" size='19' id="firstCategory" style="background-color: crimson; color:white; overflow: hidden;">
+                                    <?php $menus = Category::getCategoryByParentId(0);
+                                    while ($menu = mysqli_fetch_array($menus)) {
+                                        echo "<option style=\"margin-top: 30px; \" value='" . $menu["id"] . "'>" . $menu["name"] . "</option>";
+                                    }
+                                    ?>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                </div></div>
+        </div>
+    </div>
 </div>
 <script type="text/javascript">
 
@@ -58,9 +67,9 @@ require_once "../model/Constants.php";
                 else {
                     var json = jQuery.parseJSON(data);
                     var i = 0;
-                    var htmlOptions = "<select size='10' id='secondCategory'>";
+                    var htmlOptions = "<select class='form-control' size='19' id='secondCategory' style='background-color: crimson; color:white; overflow: hidden;'>";
                     while (i < json.length) {
-                        htmlOptions += "<option value='" + json[i].id + "'>" + json[i].name + "</option>";
+                        htmlOptions += "<option style='margin-top: 30px;' value='" + json[i].id + "'>" + json[i].name + "</option>";
                         i++;
                     }
                     htmlOptions += "</select>";
@@ -88,9 +97,9 @@ require_once "../model/Constants.php";
                 else {
                     var json = jQuery.parseJSON(data);
                     var i = 0;
-                    var htmlOptions = "<select size='10' id='thirdCategory'>";
+                    var htmlOptions = "<select class='form-control' size='19' id='thirdCategory' style='background-color: crimson; color:white; overflow: hidden;'>";
                     while (i < json.length) {
-                        htmlOptions += "<option value='" + json[i].id + "'>" + json[i].name + "</option>";
+                        htmlOptions += "<option style='margin-top: 30px;' value='" + json[i].id + "'>" + json[i].name + "</option>";
                         i++;
                     }
                     htmlOptions += "</select>";

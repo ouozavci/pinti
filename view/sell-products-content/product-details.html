@@ -1,20 +1,33 @@
 <div id="product-details-form">
-    <table>
-        <tr>
-            <td>Ürün Adı:</td>
-            <td><input id="product_name" type="text" name="product_name" placeholder="Ürün Adı"/></td>
-        </tr>
-        <tr>
-            <td>Fiyatı:</td>
-            <td><input id="product_price" type="text" name="product_price" placeholder="Fiyat"/></td>
-        </tr>
-        <tr>
-            <td>Ürün Fotoğrafı</td>
-            <td><input id="product_image" type="text" name="product_image" placeholder="URL"></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td><input id="btnSell" type="button" name="btnSell" value="Sat!"/></td>
-        </tr>
-    </table>
+    <div class="container">
+
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+                <form role="form">
+                    <h2>Ürün Kategorisi <small> Ürün bilgilerini giriniz.</small></h2>
+                    <hr class="colorgraph">
+
+                    <div class="form-group">
+                        <input id="product_name" type="text" name="product_name" placeholder="Ürün Adı" class="form-control input-lg" tabindex="1"/>
+                    </div>
+                    <div class="form-group">
+                        <input id="product_price" type="text" name="product_price" placeholder="Ürün Fiyatı" class="form-control input-lg" tabindex="2"/>
+                    </div>
+                    <div class="form-group">
+                        <input id="product_image" type="text" name="product_image" placeholder="Ürün Fotoğrafı (URL)" class="form-control input-lg" tabindex="3">
+                    </div>
+
+
+                    <hr class="colorgraph">
+                    <div class="row">
+                        <div class="col-xs-6 col-md-6"><input type="submit" value="Anasayfaya Dön" class="btn btn-primary btn-block btn-lg" tabindex="7"></div>
+                        <div class="col-xs-6 col-md-6">
+                            <input  class="btn btn-success btn-block btn-lg" id="btnSell" type="button" name="btnSell" value="Sat"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
 </div>
