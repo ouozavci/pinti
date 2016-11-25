@@ -1,0 +1,37 @@
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="dist/css/bootstrap.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+</head>
+<body>
+<?
+require_once "../controller/session.php";
+require_once "common/header.phtml";
+?>
+<form action="update-profile?userid=<?=$_GET['userid'] ?>" method="POST">
+    <table>
+       <tr>
+<td>Adınız: <input type="text" name="firstname" value="<?=$user->firstName ?>"></td>
+       </tr>
+        <tr>
+<td>Soyadınız: <input type="text" name="lastname" value="<?=$user->lastName ?>"></td>
+        </tr>
+        <tr>
+<td>E-Mail Adresiniz: <input type="text" name="email" value="<?=$user->email ?>"></td>
+        </tr>
+        <tr>
+<td>Telefon Numaranız: <input type="text" name="phonenumber"></td>
+        </tr>
+        <tr>
+<td>Adresiniz: <textarea rows="4" cols="50" name="address"> </textarea></td>
+        </tr>
+        <tr>
+<td><input type="submit" name="kaydet" value="Bilgileri Kaydet"></td>
+        </tr>
+    </table>
+</form>
+
+</body>
+</html>

@@ -14,6 +14,7 @@
        <script src="js/menubar.js" type="text/javascript"></script>
    </head>
    <body>
+   <?php require_once "common/header.phtml"; ?>
    <div class="container">
        <div class="row">
            <div class="col-xs-12 col-sm-6 col-md-6">
@@ -36,10 +37,15 @@
                                echo "$register_date" ?>
                                </p>
                            <!-- Split button -->
+
+
+
                            <div class="btn-group">
-                               <button type="button" class="btn btn-primary">
-                                   Profili Düzenle</button>
+                               <input type="button" class="btn btn-primary" onclick="window.location.href='update-profile?userid=<?=$id?>'"  value="Profili Düzenle" </input>
                            </div>
+
+
+
                            <a href='<?php
                                     require_once __DIR__.'/../model/Constants.php';
                                     echo Constants::$serverUrl;

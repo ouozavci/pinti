@@ -18,3 +18,4 @@ RewriteRule ^profil$ controller/profil.php
 RewriteRule ^satis$ controller/satis.php
 RewriteRule ^siparis$ controller/siparis.php
 RewriteRule ^sepet$ controller/sepet.php
+RewriteRule ^update-profile$ controller/update-profile.php

@@ -115,4 +115,10 @@ require_once __DIR__ . '/db/db_connect.php';
                     return NULL;
             }
         }
+
+        public static function updateProfile($id,$phoneNumber,$address){
+            $db = new DB_CONNECT();
+            $mysqli = $db->connect();
+            $result = mysqli_query($mysqli, "UPDATE users SET phoneNumber='$phoneNumber', address='$address' WHERE id='$id'");
+        }
     }
