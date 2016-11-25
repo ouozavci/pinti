@@ -18,6 +18,8 @@ require_once "../model/User.php";
 $seller = new User();
 $seller->getCustomerById($product['seller_id']);
 
+$urunler;
+$categoryId;
 ?>
 
 <div class="container">
@@ -56,6 +58,11 @@ $seller->getCustomerById($product['seller_id']);
                         <button class="add-to-cart btn btn-default" type="button" style="background-color:crimson;">
                             <?php
                                 $product_id=$product["id"];
+
+                                $categoryId=$product["category_id"]; //recommended için kullanılıyor
+                                $urunler=Product::getProductByCategoryId($categoryId);
+
+
                                 echo"
                                     <a href='sepet?ekle=$product_id' style='color:white;  text-decoration:none;'>Sepete Ekle</a>
                                 ";
@@ -172,6 +179,10 @@ $seller->getCustomerById($product['seller_id']);
 <br><br>
 <div class="container">
     <div class="row">
+        <div style="background-color: crimson; font-size: x-large; color: white; text-align: center">
+            Bu ürünlere de göz atabilirsiniz
+        </div>
+        <hr>
         <div class="col-md-12">
             <div id="Carousel" class="carousel slide">
 
@@ -183,39 +194,42 @@ $seller->getCustomerById($product['seller_id']);
 
                 <!-- Carousel items -->
                 <div class="carousel-inner">
-
-                    <div class="item active">
-                        <div class="row">
-                            <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
-                            <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
-                            <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
-                            <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
-                        </div><!--.row-->
-                    </div><!--.item-->
-
-                    <div class="item">
-                        <div class="row">
-                            <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
-                            <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
-                            <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
-                            <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
-                        </div><!--.row-->
-                    </div><!--.item-->
-
-                    <div class="item">
-                        <div class="row">
-                            <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
-                            <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
-                            <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
-                            <div class="col-md-3"><a href="#" class="thumbnail"><img src="http://placehold.it/250x250" alt="Image" style="max-width:100%;"></a></div>
-                        </div><!--.row-->
-                    </div><!--.item-->
-
+                    <?php
+                    $urun_resmi;
+                    $urun_href;
+                    $count=0;
+                    while($urun=mysqli_fetch_array($urunler)){
+                        $urun_resmi=$urun["image_url"];
+                        $urun_adi=$urun["name"];
+                        $urun_fiyati=$urun["price"];
+                        $urun_href="show-product?id=".$urun["id"];
+                        if($count==0) {
+                            echo "<div class='item active'><div class='row'>";
+                        }
+                        if($count==4 || $count==8) echo "<div class='item'><div class='row'>";
+                        echo  "<div class='col-md-3'>
+                                <a href='$urun_href' class='thumbnail'>
+                                    <img src='$urun_resmi' alt='Image' style='width:200px;height: 200px'>
+                                    <a href='$urun_href'>$urun_adi</a>
+                                    <h4>$urun_fiyati</h4>
+                                 </a>
+                               </div>";
+                        if($count==3 || $count==7 || $count==11) echo "</div></div>";
+                        $count++;
+                       // if($count==3 || $count==7 || $count==11) echo "</div></div>";
+                        if($count==12) break;
+                    }
+                    ?>
                 </div><!--.carousel-inner-->
+
                 <a data-slide="prev" href="#Carousel" class="left carousel-control">‹</a>
                 <a data-slide="next" href="#Carousel" class="right carousel-control">›</a>
             </div><!--.Carousel-->
 
+        </div>
+        <hr>
+        <div style="background-color: crimson; font-size: x-large; color: crimson; text-align: center; margin-bottom: 20px;">
+            a
         </div>
     </div>
 </div><!--.container-->
