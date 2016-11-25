@@ -1,5 +1,5 @@
 <?php
-
+require_once "../model/Constants.php";
 if($_GET) {
     if(isset($_GET['userid'])){
 
@@ -13,7 +13,7 @@ if($_POST){
     if(isset($_GET['userid'])) {
         $userid = $_GET['userid'];
         User::updateProfile($userid,$_POST['phonenumber'],$_POST['address'],$_POST['imageurl']);
-        header("Location: http://localhost/pinti/profile?userid=$userid");
+        header("Location:".Constants::$serverUrl."/profile?userid=$userid");
         die();
     }
 
