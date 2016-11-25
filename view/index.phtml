@@ -93,11 +93,11 @@ require_once "common/header.phtml"; ?>
                             if ($count == 1) {
                                 echo "<li class='col-sm-3'><ul>";
                             }
-                            echo "<li class='dropdown-header'>" . $subMenu["name"] . "</li>";
+                            echo "<li class='dropdown-header'><a href ='".$subMenu['id']."'>" . $subMenu["name"] . "</a></li>";
                             $subsubMenus = Category::getCategoryByParentId($subMenu['id']);
                             if (!empty($subsubMenus))
                                 while (($subsubMenu = mysqli_fetch_array($subsubMenus))) {
-                                    echo "<li><a href='#'>" . $subsubMenu["name"] . "</a>";
+                                    echo "<li><a href='".$subsubMenu['id']."'>" . $subsubMenu["name"] . "</a>";
                                 }
 
                             if ($count != 3)
@@ -119,7 +119,9 @@ require_once "common/header.phtml"; ?>
         </div>
     </nav>
 </div>
-
+<?
+if($cat2show == 0)
+echo '
 <!-- Carousel -->
 <div class="container">
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -151,21 +153,30 @@ require_once "common/header.phtml"; ?>
 
 
         <ul class="nav nav-pills nav-justified">
-            <li data-target="#myCarousel" data-slide-to="0" class="active"><a href="#">Nike Ürünleri<small>Ayakkabılarda %30'a varan indirim</small></a></li>
+            <li data-target="#myCarousel" data-slide-to="0" class="active"><a href="#">Nike Ürünleri<small>Ayakkabılarda %30\'a varan indirim</small></a></li>
             <li data-target="#myCarousel" data-slide-to="1"><a href="#">Samsung Ürünleri<small>Samsung Galaxy S7 Edge stoklarımızda</small></a></li>
             <li data-target="#myCarousel" data-slide-to="2"><a href="#">Apple Ürünleri<small>Apple Iphone 7 ve Iphone 7 Plus stoklarımızda</small></a></li>
-            <li data-target="#myCarousel" data-slide-to="3"><a href="#">Hp Ürünleri<small>Dizüstü bilgisayarlarda %10'a varan indirim</small></a></li>
+            <li data-target="#myCarousel" data-slide-to="3"><a href="#">Hp Ürünleri<small>Dizüstü bilgisayarlarda %10\'a varan indirim</small></a></li>
         </ul>
 
 
     </div><!-- End Carousel -->
+</div>';
+else echo "
+<div>
+    <h1 style=\"color:crimson; font-family: 'Times New Roman'\">".mysqli_fetch_array(Category::getCAtegoryById($cat2show))['name']."</h1>
 </div>
+";
+?>
 
 
 <?php $count = 3; ?>
 <div class="container">
     <?php require_once "../model/Product.php";
+    if($cat2show == 0)
     $products = Product::getAll();
+    else
+    $products = Product::getChildsOf($cat2show);
     while ($product = mysqli_fetch_array($products)) {
         if ($count == 3) {
             echo "<div class=\"row\" style=\"margin-top:20px\">";

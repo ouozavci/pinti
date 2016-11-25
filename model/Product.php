@@ -45,4 +45,20 @@ class Product
                                         VALUES ('$name','$price','$category_id','0','$seller_id','$image_url');");
         return $result;
     }
+    public static function getChildsOf($category_id){
+        $db = new DB_CONNECT();
+        $mysqli = $db->connect();
+        require_once "Category.php";
+        $childs = Category::getCategoryByParentId($category_id);
+
+        $sqlString = "SELECT * FROM products where category_id='$category_id'";
+
+            if($childs)
+            while ($child = mysqli_fetch_array($childs)){
+                $sqlString=$sqlString." OR category_id='".$child['id']."'";
+            }
+          //  echo $sqlString;
+        $result = mysqli_query($mysqli,$sqlString);
+        return $result;
+    }
 }
