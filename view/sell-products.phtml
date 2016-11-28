@@ -10,40 +10,35 @@ require_once "../controller/session.php";
 require_once "common/header.phtml";
 require_once "../model/Category.php";
 require_once "../model/Constants.php";
-
-    if(!$_SESSION['isLogged']){
-        header('Location: '.Constants::$serverUrl."/login");
-    }
+if(!$_SESSION['isLogged']){
+    header('Location: '.Constants::$serverUrl."/login");
+}
 ?>
 <div id="content">
-<div id="sell-form-content">
-    <table align="left">
-        <tr>
-            <td><h4>Ürün Kategorisi:</h4></td>
-        </tr>
-        <tr id="categoryRow">
-            <td><select size='10' id="firstCategory">
-                    <?php $menus = Category::getCategoryByParentId(0);
-                    while ($menu = mysqli_fetch_array($menus)) {
-                        echo "<option value='" . $menu["id"] . "'>" . $menu["name"] . "</option>";
-                    }
-                    ?>
-                </select>
-            </td>
-        </tr>
-    </table>
-</div>
+    <div id="sell-form-content">
+        <table align="left">
+            <tr>
+                <td><h4>Ürün Kategorisi:</h4></td>
+            </tr>
+            <tr id="categoryRow">
+                <td><select size='10' id="firstCategory">
+                        <?php $menus = Category::getCategoryByParentId(0);
+                        while ($menu = mysqli_fetch_array($menus)) {
+                            echo "<option value='" . $menu["id"] . "'>" . $menu["name"] . "</option>";
+                        }
+                        ?>
+                    </select>
+                </td>
+            </tr>
+        </table>
+    </div>
 </div>
 <script type="text/javascript">
-
     var ProductCategoryID;
-
     $('#firstCategory').change(function () {
-
         $('#secondCategory').remove();
         $('#thirdCategory').remove();
         $('#btnContinue').remove();
-
         var selectedFirst = $('#firstCategory').val();
         $.post("<?php require_once "../model/Constants.php";
                 echo Constants::$serverUrl; ?>/controller/getCategoryByJSON.php",
@@ -64,18 +59,14 @@ require_once "../model/Constants.php";
                         i++;
                     }
                     htmlOptions += "</select>";
-
                     $('#categoryRow').append(htmlOptions);
                 }
             });
     });
     $('body').on('change', '#secondCategory', function () {
-
         $('#thirdCategory').remove();
         $('#btnContinue').remove();
-
         var selectedSecond = $('#secondCategory').val();
-
         $.post("<? echo Constants::$serverUrl; ?>/controller/getCategoryByJSON.php",
             {
                 id: selectedSecond
@@ -94,7 +85,6 @@ require_once "../model/Constants.php";
                         i++;
                     }
                     htmlOptions += "</select>";
-
                     $('#categoryRow').append(htmlOptions);
                 }
             });
@@ -116,9 +106,8 @@ require_once "../model/Constants.php";
         var name=$('#product_name').val();
         var price=$('#product_price').val();
         var image_url=$('#product_image').val();
-
         $.post("<?php require_once "../model/Constants.php";
-            echo Constants::$serverUrl; ?>/controller/insertProduct.php",
+                echo Constants::$serverUrl; ?>/controller/insertProduct.php",
             {
                 name: name,
                 price: price,
@@ -130,7 +119,6 @@ require_once "../model/Constants.php";
 
             }
         )
-
     })
 </script>
 </body>
