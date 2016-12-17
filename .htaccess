@@ -21,3 +21,5 @@ RewriteRule ^siparis$ controller/siparis.php
 RewriteRule ^sepet$ controller/sepet.php
 RewriteRule ^update-profile$ controller/update-profile.php
 RewriteRule ^messaging$ controller/messaging.php
+RewriteRule ^adres$ controller/adres.php
+RewriteRule ^odeme$ controller/odeme.php

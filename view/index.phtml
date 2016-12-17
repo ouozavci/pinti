@@ -164,7 +164,7 @@ if ($cat2show == 0)
 </div>';
 else echo "
 <div>
-    <h1 style=\"color:crimson; font-family: 'Times New Roman'\">" . mysqli_fetch_array(Category::getCAtegoryById($cat2show))['name'] . "</h1>
+    <h1 style=\"color:crimson; font-family: 'Times New Roman'\">" . mysqli_fetch_array(Category::getCategoryById($cat2show))['name'] . "</h1>
 </div>
 ";
 ?>

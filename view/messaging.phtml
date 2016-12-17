@@ -44,7 +44,6 @@
             });
 
             var refTalk = database.ref(<?=$talkId?>+"/"+<?=$myId?>);
-
             refTalk.once('value').then(function (snapshot) {
                 var count = snapshot.numChildren();
                 refTalk.child(count).set({
