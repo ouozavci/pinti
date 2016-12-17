@@ -15,7 +15,7 @@ header('content-type: text/html; charset=utf8');
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.13.1/jquery.validate.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.payment/1.2.3/jquery.payment.min.js"></script>
-
+    <script src="js/formKontrolOdeme.js"></script>
     <!-- If you're using Stripe for payments -->
     <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
     <link rel="stylesheet" type="text/css" href="css/odeme.css">
@@ -45,19 +45,13 @@ require_once "common/header.phtml";
                     </div>
                 </div>
                 <div class="panel-body">
-                    <form role="form" id="payment-form" method="POST" action="javascript:void(0);">
+                    <form role="form" name="frm" id="payment-form" method="post">
                         <div class="row">
                             <div class="col-xs-12">
                                 <div class="form-group">
                                     <label for="cardNumber">Kart Numarası</label>
                                     <div class="input-group">
-                                        <input
-                                            type="tel"
-                                            class="form-control"
-                                            name="cardNumber"
-                                            autocomplete="cc-number"
-                                            required autofocus
-                                        />
+                                        <input type="tel" class="form-control" name="cardNumber" id="cardNumber" autocomplete="cc-number" required autofocus/>
                                         <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
                                     </div>
                                 </div>
@@ -67,27 +61,13 @@ require_once "common/header.phtml";
                             <div class="col-xs-7 col-md-7">
                                 <div class="form-group">
                                     <label for="cardExpiry"><span class="hidden-xs">Son Kullanma Tarihi</span></label>
-                                    <input
-                                        type="tel"
-                                        class="form-control"
-                                        name="cardExpiry"
-                                        placeholder="AY / YIL"
-                                        autocomplete="cc-exp"
-                                        required
-                                    />
+                                    <input type="tel" class="form-control" name="cardExpiry" id="cardExpiry" placeholder="AY / YIL" autocomplete="cc-exp" required/>
                                 </div>
                             </div>
                             <div class="col-xs-5 col-md-5 pull-right">
                                 <div class="form-group">
                                     <label for="cardCVC">CVC</label>
-                                    <input
-                                        type="tel"
-                                        class="form-control"
-                                        name="cardCVC"
-                                        placeholder="XXX"
-                                        autocomplete="cc-csc"
-                                        required
-                                    />
+                                    <input type="tel" class="form-control" name="cardCVC" id="cardCVC" placeholder="XXX" autocomplete="cc-csc" required/>
                                 </div>
                             </div>
                         </div>
@@ -95,18 +75,20 @@ require_once "common/header.phtml";
                             <div class="col-xs-12">
                                 <div class="form-group">
                                     <label for="couponCode">Kart Üzerindeki Ad Soyad</label>
-                                    <input type="text" class="form-control" name="couponCode" />
+                                    <input type="text" class="form-control" id="adSoyad" name="adSoyad" />
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-xs-12">
-                                <button onClick="location.href='/pinti'" class="subscribe btn btn-success btn-lg btn-block" type="button">Ödeme Yap Ve Satın Al</button>
+                                <button class="subscribe btn btn-success btn-lg btn-block" onClick="checkform()" type="button">Ödeme Yap Ve Satın Al</button>
                             </div>
                         </div>
-                        <div class="row" style="display:none;">
+                        <div class="row">
                             <div class="col-xs-12">
-                                <p class="payment-errors"></p>
+                                <p class="payment-errors">
+                                    <label class="control-label" id="errorLabel" name="errorLabel" style="color: red;"></label>
+                                </p>
                             </div>
                         </div>
                     </form>

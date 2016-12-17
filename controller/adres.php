@@ -22,7 +22,7 @@ if($_POST){
         exit();
     }
     else{
-        echo("afsa");
+
     }
 
 }
