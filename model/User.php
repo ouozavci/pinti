@@ -120,9 +120,9 @@ require_once __DIR__ . '/db/db_connect.php';
             }
         }
 
-        public static function updateProfile($id,$phoneNumber,$address,$imageurl){
+        public static function updateProfile($id,$firstname,$lastname,$email,$phoneNumber,$address,$imageurl){
             $db = new DB_CONNECT();
             $mysqli = $db->connect();
-            $result = mysqli_query($mysqli, "UPDATE users SET phoneNumber='$phoneNumber', address='$address' , img_url='$imageurl' WHERE id='$id'");
+            $result = mysqli_query($mysqli, "UPDATE users SET firstname='$firstname', lastname='$lastname', email='$email', phoneNumber='$phoneNumber', address='$address' , img_url='$imageurl' WHERE id='$id'");
         }
     }

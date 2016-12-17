@@ -39,17 +39,17 @@
                                <label> Telefon Numarası: </label>
                                     <?=$user->phonenumber ?>
                                 <br />
-                               <label> Adres: </label>
-                                    <?=$user->address ?>
-                                <br />
-
                            <!-- Split button -->
 
 
-
+                                <?php  require_once __DIR__.'/../controller/session.php';
+                                if($_SESSION['id'] == $user->id ) ?>
                            <div class="btn-group">
                                <input type="button" class="btn btn-primary" onclick="window.location.href='update-profile?userid=<?=$id?>'"  value="Profili Düzenle" </input>
                            </div>
+                           <div class="btn-group">
+                               <input type="button" class="btn btn-primary" onclick="window.location.href="   value="Mesaj Gönder" </input>
+                           </div> </br>
 
 
 
