@@ -1,0 +1,135 @@
+<html>
+<head>
+    <title>Messaging</title>
+    <link rel="stylesheet" href="css/messaging.css">
+    <script src="https://www.gstatic.com/firebasejs/3.6.3/firebase.js"></script>
+    <script
+        src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js">
+    </script>
+    <script type="text/javascript">
+        function open_chatbox()
+        {
+            $('#chat').fadeOut(500);
+            $('#chatBox').fadeIn(1000);
+        }
+        function closeChat()
+        {
+            $('#chatBox').fadeOut(500);
+            $('#chat').fadeIn(1000);
+        }
+    </script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyDQJvclUrQRRNfqy42w0qX7t9RC2h-PSVQ",
+            authDomain: "messageapplication-c58c8.firebaseapp.com",
+            databaseURL: "https://messageapplication-c58c8.firebaseio.com",
+            storageBucket: "messageapplication-c58c8.appspot.com",
+            messagingSenderId: "39020502158"
+        };
+        firebase.initializeApp(config);
+        var database = firebase.database();
+        var btnSend = document.getElementsByName("send");
+
+        function writeMessage(userId, message) {
+            var ref = database.ref(<?=$myId?>+"/"+<?=$talkId?>);
+
+            ref.once('value').then(function (snapshot) {
+                var count = snapshot.numChildren();
+                ref.child(count).set({
+                    type:"sent",
+                    at: new Date().getTime().toString(),
+                    msg:message
+                });
+            });
+
+            var refTalk = database.ref(<?=$talkId?>+"/"+<?=$myId?>);
+
+            refTalk.once('value').then(function (snapshot) {
+                var count = snapshot.numChildren();
+                refTalk.child(count).set({
+                    type:"rcv",
+                    at: new Date().getTime().toString(),
+                    msg:message
+                });
+            });
+
+            /*            ref.set({
+
+                msg:message
+            })
+
+            /*
+            var childCount=0;
+              ref.once('value')
+                    .then(function (snapshot) {
+                        childCount=snapshot.numChildren();
+                        alert(childCount);
+
+
+                var packageRef=ref.child(childCount);
+                packageRef.set({
+
+                    msg:message
+                })
+
+                    }*/
+
+
+           document.getElementById("txtMessage").value="";
+
+        }
+        function sendMessage() {
+            var textBox = document.getElementById("txtMessage");
+            var text = textBox.value;
+            writeMessage(<?=$talkId?>,text);
+            addMessage();
+        }
+        function addMessage(){
+            var para=document.createElement("p");
+
+            var textBox=document.getElementById("txtMessage");
+            var text=textBox.value;
+
+            //   para.textContent=text;
+
+            var node=document.createTextNode(text);
+
+            para.appendChild(node);
+            var element = document.getElementById("textMessage");
+            element.appendChild(para);
+        }
+        var ref = database.ref(<?=$myId?>+"/"+<?=$talkId?>);
+        ref.on('value', function(snapshot) {
+            var para=document.createElement("p");
+            var node=document.createTextNode("");
+            var result = snapshot.val().numChildren();
+            para.innerHTML=result;
+            para.appendChild(node);
+            var element = document.getElementById("textMessage");
+            element.appendChild(para);
+        });
+    </script>
+</head>
+<body>
+<div id="chat" onClick="open_chatbox();">Satıcıya Mesaj Gönder</div>
+<div id="chatBox"><div onclick="closeChat()" id="close">X</div>
+    <div class='chatContainer'>
+        <div class="chatHeader">
+            <h3>Pinti Mesaj Uygulaması</h3>
+        </div>
+        <div class='chatMessages'>
+            <div class='sendMessage'>
+                <p id="textMessage"></p>
+            </div>
+        </div>
+        <div class='chatBottom'>
+            <form action='#' onsubmit='return false;' id='chatForm'>
+                <input type="text" name="msg" id="txtMessage" placeholder="Mesajınızı buraya giriniz!">
+                <input type="submit" name="send" value="Gönder" onclick="sendMessage()">
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
