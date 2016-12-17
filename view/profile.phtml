@@ -1,67 +1,99 @@
 ﻿
+
+<?php
+/**
+ * Created by PhpStorm.
+ * User: oguz
+ * Date: 8.10.2016
+ * Time: 14:12
+ */?>
+<?php
+require_once "../controller/session.php";
+require_once "common/header.phtml"; ?>
 <html>
-   <head>
-      <title>Profile</title>
-       <link rel="stylesheet" type="text/css" href="css/style.css"/>
-       <link rel="stylesheet" type="text/css" href="css/menubar.css"/>
-       <link rel="stylesheet" type="text/css" href="css/signin.css"/>
-       <!-- Bootstrap core CSS -->
-       <link href="dist/css/bootstrap.css" rel="stylesheet">
+<head>
+    <title>Yardım</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="css/help.css"/>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" type="text/css" href="dist/css/bootstrap.css">
+    <!-- Custom styles for this template -->
+    <!link href="navbar.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/menubar.css"/>
+    <!link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="row affix-row" style="background-color: #ffffff">
+    <div class="col-sm-3 col-md-2 affix-sidebar" >
+        <div class="sidebar-nav">
+            <div class="navbar navbar-default" role="navigation" style="background-color: #ffffff">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <span class="visible-xs navbar-brand">Sidebar menu</span>
+                </div>
+                <div class="navbar-collapse collapse sidebar-navbar-collapse">
+                    <ul class="nav navbar-nav" id="sidenav01">
 
-       <!-- Custom styles for this template -->
-       <link href="navbar.css" rel="stylesheet">
-       <script src="js/jquery-3.1.1.min.js" type="text/javascript"></script>
-       <script src="js/menubar.js" type="text/javascript"></script>
-   </head>
-   <body>
-   <?php require_once "common/header.phtml"; ?>
-   <div class="container">
-       <div class="row">
-           <div class="col-xs-12 col-sm-6 col-md-6">
-               <div class="well well-sm">
-                   <div class="row">
-                       <div class="col-sm-6 col-md-4">
-                           <?php
-                           if($img_url==NULL)
-                               $img_url="img/defaultphoto.png";
-                           echo " <img src='$img_url' class=\"img-rounded img-responsive\" alt=\"\">"?>
-                       </div>
-                       <div class="col-sm-6 col-md-8">
-                           <h4> <?php echo $firstName." ".$lastName ?></h4>
-                           <p>
-                               <i class="glyphicon glyphicon-envelope"></i><?php echo $email ?>
-                               <br />
-                                <label>Kayıt Tarihi: </label>
-                               <?php
-                               $register_date=date('d.m.Y', strtotime($register_date));
-                               echo "$register_date" ?>
-                               </p>
-                               <label> Telefon Numarası: </label>
-                                    <?=$user->phonenumber ?>
-                                <br />
-                           <!-- Split button -->
+                        <li>
+                            <img src="<?=$user->img_url?>" width="100px" height="100px">
+                        </li>
 
+                        <li>
+                            <a href="#" data-toggle="collapse" data-target="#toggleDemo1" data-parent="#sidenav01" class="collapsed">
+                                <span class="glyphicon glyphicon-shopping-cart"></span> E-Mail <span class="caret pull-right"></span>
+                            </a>
+                            <div class="collapse" id="toggleDemo1" style="height: 0px;">
+                                <ul class="nav nav-list">
+                                    <li><?=$email ?></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="#" data-toggle="collapse" data-target="#toggleDemo2" data-parent="#sidenav01" class="collapsed">
+                                <span class="glyphicon glyphicon-shopping-cart"></span> Kayıt Tarihi <span class="caret pull-right"></span>
+                            </a>
+                            <div class="collapse" id="toggleDemo2" style="height: 0px;">
+                                <ul class="nav nav-list">
+                                    <li><?=$register_date ?></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="#" data-toggle="collapse" data-target="#toggleDemo3" data-parent="#sidenav01" class="collapsed">
+                                <span class="glyphicon glyphicon-user"></span> Telefon Numarası <span class="caret pull-right"></span>
+                            </a>
+                            <div class="collapse" id="toggleDemo3" style="height: 0px;">
+                                <ul class="nav nav-list">
+                                    <li><?=$user->phonenumber ?></li>
+                                </ul>
+                            </div>
 
-                                <?php  require_once __DIR__.'/../controller/session.php';
-                                if($_SESSION['id'] == $user->id ) ?>
-                           <div class="btn-group">
-                               <input type="button" class="btn btn-primary" onclick="window.location.href='update-profile?userid=<?=$id?>'"  value="Profili Düzenle" </input>
-                           </div>
-                           <div class="btn-group">
-                               <input type="button" class="btn btn-primary" onclick="window.location.href="   value="Mesaj Gönder" </input>
-                           </div> </br>
+                        </li>
+                        <?php if($_SESSION['id'] == $id) {
+                            echo "
+                        <input type='button'  class='btn btn-primary' onclick=\"window.location.href='update-profile?userid='. $id .'\" value='Profili Düzenle' </input> </br> </br> 
+                           ";}  ?>
+                        <input type="button" class="btn btn-primary" onclick=""  value="Mesaj Gönder" </input>
 
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-9 col-md-10 affix-content">
+        <div class="container">
 
-
-                           <a href='<?php
-                                    require_once __DIR__.'/../model/Constants.php';
-                                    echo Constants::$serverUrl;
-                                        ?>'>AnaSayfaya Dön</a>
-                       </div>
-                   </div>
-               </div>
-           </div>
-       </div>
-   </div>
-   </body>
+            <div class="page-header">
+                <h3><?=$user->firstName . " ".$user->lastName?></h3>
+            </div>
+            <p>PROFİL SAYFASI</p>
+</body>
 </html>
