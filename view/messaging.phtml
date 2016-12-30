@@ -65,7 +65,12 @@
         var ref = database.ref(<?=$myId?>+"/"+<?=$talkId?>);
         ref.on('value', function(snapshot) {
 
+
+            var element = document.getElementById("textMessage");
+            element.innerHTML="";
+
             var childCount=snapshot.numChildren();
+
             for(var i=0; i<childCount;i++){
                 var msg=snapshot.child(i.toString()).child("msg").val();
                 var type=snapshot.child(i.toString()).child("type").val();
@@ -102,7 +107,7 @@
                         "margin:5px;");
                 }
                 para.appendChild(node);
-                var element = document.getElementById("textMessage");
+
                 element.appendChild(para);
             }
             var container=document.getElementById("chatMessage");
