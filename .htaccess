@@ -23,3 +23,4 @@ RewriteRule ^update-profile$ controller/update-profile.php
 RewriteRule ^messaging$ controller/messaging.php
 RewriteRule ^adres$ controller/adres.php
 RewriteRule ^odeme$ controller/odeme.php
+RewriteRule ^inbox$ controller/inbox.php

@@ -31,7 +31,7 @@
         };
         firebase.initializeApp(config);
         var database = firebase.database();
-        var btnSend = document.getElementsByName("send");
+       // var btnSend = document.getElementsByName("send");
 
         function writeMessage(userId, message) {
             var ref = database.ref(<?=$myId?>+"/"+<?=$talkId?>);

@@ -1,0 +1,74 @@
+<html>
+<head>
+    <title>Gelen Kutusu</title>
+    <script src="https://www.gstatic.com/firebasejs/3.6.3/firebase.js"></script>
+    <script
+        src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js">
+    </script>
+</head>
+<body>
+<p id="text"></p>
+<table id="msgTable" align="center">
+    <tr>
+        <td></td>
+    </tr>
+</table>
+<?php
+require_once "../model/User.php";
+require_once "../model/Constants.php";
+?>
+
+<script type="text/javascript">
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyDQJvclUrQRRNfqy42w0qX7t9RC2h-PSVQ",
+        authDomain: "messageapplication-c58c8.firebaseapp.com",
+        databaseURL: "https://messageapplication-c58c8.firebaseio.com",
+        storageBucket: "messageapplication-c58c8.appspot.com",
+        messagingSenderId: "39020502158"
+    };
+    var inboxApp = firebase.initializeApp(config);
+    var database = inboxApp.database();
+
+    var ref = database.ref("<?=$myId?>");
+    var msgTable = document.getElementById("msgTable");
+
+    ref.once('value').then(function (snapshot) {
+        var count = snapshot.numChildren();
+        if(count>0){
+            msgTable.innerHTML = "<tr><td><h1 style='" +
+                "color:crimson;" +
+                "font-family: monospace, serif;" +
+                "" +
+                "'>Mesajlarınız</h1><td></tr>";
+        snapshot.forEach(function (childSnapshot) {
+            var talkId = childSnapshot.key;
+            var postTo = "<?=Constants::$serverUrl?>/controller/getUsername.php";
+            $.ajax({
+                url: postTo,
+                type: 'POST',
+                data: {
+                    id:talkId
+                },
+                success:function (data) {
+                    msgTable.innerHTML += "<tr><td style='text-align:center'><a style='" +
+                        "text-decoration:none;" +
+                        "" +
+                        "font-size:15pt;" +
+                        "font-family:Times New Roman;" +
+                        "color:blue;" +
+                        "' " +
+                        "href='<?=Constants::$serverUrl?>/messaging?talkId="+talkId+"'>"+data.toString().replace("\"","").replace("\"","")+"</a></td></tr>";
+                }
+            });
+
+        });}
+        else {
+            msgTable.innerHTML = "<tr><td><p> Mesajınız bulunmamaktadır...</p><td></tr>";
+        }
+    });
+
+
+</script>
+</body>
+</html>
