@@ -11,6 +11,8 @@
         {
             $('#chat').fadeOut(500);
             $('#chatBox').fadeIn(1000);
+            var container=document.getElementById("chatMessage");
+            container.scrollTop=container.scrollHeight;
         }
         function closeChat()
         {
@@ -52,29 +54,6 @@
                     msg:message
                 });
             });
-
-            /*            ref.set({
-
-                msg:message
-            })
-
-            /*
-            var childCount=0;
-              ref.once('value')
-                    .then(function (snapshot) {
-                        childCount=snapshot.numChildren();
-                        alert(childCount);
-
-
-                var packageRef=ref.child(childCount);
-                packageRef.set({
-
-                    msg:message
-                })
-
-                    }*/
-
-
            document.getElementById("txtMessage").value="";
 
         }
@@ -82,42 +61,63 @@
             var textBox = document.getElementById("txtMessage");
             var text = textBox.value;
             writeMessage(<?=$talkId?>,text);
-            addMessage();
-        }
-        function addMessage(){
-            var para=document.createElement("p");
-
-            var textBox=document.getElementById("txtMessage");
-            var text=textBox.value;
-
-            //   para.textContent=text;
-
-            var node=document.createTextNode(text);
-
-            para.appendChild(node);
-            var element = document.getElementById("textMessage");
-            element.appendChild(para);
         }
         var ref = database.ref(<?=$myId?>+"/"+<?=$talkId?>);
         ref.on('value', function(snapshot) {
-            var para=document.createElement("p");
-            var node=document.createTextNode("");
-            var result = snapshot.val().numChildren();
-            para.innerHTML=result;
-            para.appendChild(node);
-            var element = document.getElementById("textMessage");
-            element.appendChild(para);
+
+            var childCount=snapshot.numChildren();
+            for(var i=0; i<childCount;i++){
+                var msg=snapshot.child(i.toString()).child("msg").val();
+                var type=snapshot.child(i.toString()).child("type").val();
+               // alert(msg);
+                var para=document.createElement("p");
+                var node=document.createTextNode("");
+                para.innerHTML=msg;
+                if(type=="rcv"){
+                    para.setAttribute("style","" +
+                        "color:black;" +
+                        "clear:both;" +
+                        "float:left;"+
+                        "padding:6px;" +
+                        "text-align:left;" +
+                        "border-radius:25px;" +
+                        "background-color:#ff7f7f;" +
+                        "font-family:'Trebuchet MS', Helvetica, sans-serif" +
+                        "font-style:normal;" +
+                        "font-size:13pt;" +
+                        "margin:5px;");
+                }
+                else{
+                    para.setAttribute("style","" +
+                        "color:black;" +
+                        "clear:both;" +
+                        "padding:6px;" +
+                        "float:right;"+
+                        "text-align:right;" +
+                        "border-radius:25px;" +
+                        "background-color:#98D2F2;" +
+                        "font-family:'Trebuchet MS', Helvetica, sans-serif" +
+                        "font-style:normal;" +
+                        "font-size:13pt;" +
+                        "margin:5px;");
+                }
+                para.appendChild(node);
+                var element = document.getElementById("textMessage");
+                element.appendChild(para);
+            }
+            var container=document.getElementById("chatMessage");
+            container.scrollTop=container.scrollHeight;
         });
     </script>
 </head>
 <body>
 <div id="chat" onClick="open_chatbox();">Satıcıya Mesaj Gönder</div>
 <div id="chatBox"><div onclick="closeChat()" id="close">X</div>
-    <div class='chatContainer'>
+    <div class='chatContainer' id="chatContainer">
         <div class="chatHeader">
             <h3>Pinti Mesaj Uygulaması</h3>
         </div>
-        <div class='chatMessages'>
+        <div class='chatMessages' id="chatMessage">
             <div class='sendMessage'>
                 <p id="textMessage"></p>
             </div>

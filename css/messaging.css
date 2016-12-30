@@ -26,6 +26,7 @@
     height: 420px;
     border-bottom: 1px solid #ddd;
     overflow-y: scroll;
+
 }
 .chatContainer> .chatBottom form input[type='submit']{
     padding: 5px;
@@ -86,3 +87,5 @@
     font-family:Cambria;
     right:0px;top:0px;
 }
+
+
