@@ -6,20 +6,6 @@
     <script
         src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js">
     </script>
-    <script type="text/javascript">
-        function open_chatbox()
-        {
-            $('#chat').fadeOut(500);
-            $('#chatBox').fadeIn(1000);
-            var container=document.getElementById("chatMessage");
-            container.scrollTop=container.scrollHeight;
-        }
-        function closeChat()
-        {
-            $('#chatBox').fadeOut(500);
-            $('#chat').fadeIn(1000);
-        }
-    </script>
     <script>
         // Initialize Firebase
         var config = {
@@ -116,8 +102,7 @@
     </script>
 </head>
 <body>
-<div id="chat" onClick="open_chatbox();">Satıcıya Mesaj Gönder</div>
-<div id="chatBox"><div onclick="closeChat()" id="close">X</div>
+
     <div class='chatContainer' id="chatContainer">
         <div class="chatHeader">
             <h3>Pinti Mesaj Uygulaması</h3>
@@ -134,6 +119,5 @@
             </form>
         </div>
     </div>
-</div>
 </body>
 </html>
