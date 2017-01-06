@@ -43,9 +43,9 @@
 require_once "../controller/session.php";
 require_once "common/header.phtml"; ?>
 <div id="divSearch">
-    <form action="search.php" method="get">
-        <input type="text" name="searchKey" placeholder="Ürün Arayın...">
-        <input type="submit" name="search" value="Getir">
+    <form action="search?keyword=" method="get">
+        <input type="text" name="keyword" placeholder="Ürün Arayın...">
+        <input type="submit" value="Getir">
     </form>
 </div>
 <div class="container">

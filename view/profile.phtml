@@ -12,7 +12,7 @@ require_once "../controller/session.php";
 require_once "common/header.phtml"; ?>
 <html>
 <head>
-    <title>Yardım</title>
+    <title><?=$user->firstName ." ".$user->lastName?> Profili</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="css/style.css"/>
     <link rel="stylesheet" type="text/css" href="css/help.css"/>
@@ -51,7 +51,7 @@ require_once "common/header.phtml"; ?>
                             </a>
                             <div class="collapse" id="toggleDemo1" style="height: 0px;">
                                 <ul class="nav nav-list">
-                                    <li><?=$email ?></li>
+                                    <li><?=$user->email ?></li>
                                 </ul>
                             </div>
                         </li>
@@ -75,7 +75,7 @@ require_once "common/header.phtml"; ?>
                                 </ul>
                             </div>
                         </li>
-                        </ul>
+                  </ul>
                     <?php  require_once __DIR__.'/../controller/session.php';
                     if($_SESSION['id'] == $user->id ) ?>
                     <div class="btn-group">
@@ -83,7 +83,8 @@ require_once "common/header.phtml"; ?>
                     </div>
                     <div class="btn-group">
                         <input type="button" class="btn btn-primary" onclick="window.location.href='messaging?talkId=<?=$id?>'"   value="Mesaj Gönder" </input>
-                    </div> </br>
+                    </div> 
+
                 </div><!--/.nav-collapse -->
             </div>
         </div>
