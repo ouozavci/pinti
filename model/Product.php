@@ -61,4 +61,10 @@ class Product
         $db = null;
         return $result;
     }
+    public static function getProductsBySearchKeyword($keyword){
+        $db = new DB_CONNECT();
+        $mysqli = $db->connect();
+        $result = mysqli_query($mysqli,"SELECT * FROM products WHERE name LIKE '%{$keyword}%'");
+        return $result;
+    }
 }

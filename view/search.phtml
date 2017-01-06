@@ -1,0 +1,44 @@
+<?php
+require_once "../controller/session.php";
+require_once "common/header.phtml";
+require_once "../model/Product.php";
+
+
+?>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="css/help.css"/>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" type="text/css" href="dist/css/bootstrap.css">
+    <!-- Custom styles for this template -->
+    <!link href="navbar.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/menubar.css"/>
+    <!link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<?php
+$keyword = $_GET['keyword'];
+
+$searchProducts = Product::getProductsBySearchKeyword($keyword);
+?>
+<h1>"<?= $keyword ?>" için arama sonuçları</h1>
+<table align="center">
+
+    <tr>
+        <td>
+          <? while($row = mysqli_fetch_array($searchProducts)){?>
+            <img src="<?=$row['image_url']?>" width="150" height="150"/><br>
+            <a href="show-product?id=<?=$row['id']?>"> <?=$row['name']?> </a><br><br>
+        </td>
+    </tr>
+
+
+    <?}?>
+</table>
+
+</body>
+</html>
