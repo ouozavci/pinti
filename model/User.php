@@ -125,4 +125,18 @@ require_once __DIR__ . '/db/db_connect.php';
             $mysqli = $db->connect();
             $result = mysqli_query($mysqli, "UPDATE users SET firstname='$firstname', lastname='$lastname', email='$email', phoneNumber='$phoneNumber', address='$address' , img_url='$imageurl' WHERE id='$id'");
         }
+
+        public static function updateProfileWhenBuying($id,$phoneNumber,$address,$city,$county,$zipcode){
+            $db = new DB_CONNECT();
+            $mysqli = $db->connect();
+            $result = mysqli_query($mysqli, "UPDATE users SET phoneNumber='$phoneNumber', address='$address' , city='$city', county='$county', zipcode='$zipcode' WHERE id='$id'");
+        }
+
+        public static function getName($id){
+            $db = new DB_CONNECT();
+            $mysqli = $db->connect();
+            $result = mysqli_query($mysqli, "SELECT firstName,lastName from users where id='$id'");
+            return $result;
+        }
+
     }

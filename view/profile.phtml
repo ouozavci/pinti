@@ -45,7 +45,6 @@ require_once "common/header.phtml"; ?>
                         <li>
                             <img src="<?=$user->img_url?>" width="100px" height="100px">
                         </li>
-
                         <li>
                             <a href="#" data-toggle="collapse" data-target="#toggleDemo1" data-parent="#sidenav01" class="collapsed">
                                 <span class="glyphicon glyphicon-shopping-cart"></span> E-Mail <span class="caret pull-right"></span>
@@ -75,15 +74,17 @@ require_once "common/header.phtml"; ?>
                                     <li><?=$user->phonenumber ?></li>
                                 </ul>
                             </div>
-
                         </li>
-                        <?php if($_SESSION['id'] == $id) {
-                            echo "
-                        <input type='button'  class='btn btn-primary' onclick=\"window.location.href='update-profile?userid='.$id.'\" value='Profili Düzenle' </input> </br> </br> 
-                           ";}  ?>
-                        <input type="button" class="btn btn-primary" onclick=""  value="Mesaj Gönder" </input>
+                  </ul>
+                    <?php  require_once __DIR__.'/../controller/session.php';
+                    if($_SESSION['id'] == $user->id ) ?>
+                    <div class="btn-group">
+                        <input type="button" class="btn btn-primary" onclick="window.location.href='update-profile?userid=<?=$id?>'"  value="Profili Düzenle" </input>
+                    </div>
+                    <div class="btn-group">
+                        <input type="button" class="btn btn-primary" onclick="window.location.href='messaging?talkId=<?=$id?>'"   value="Mesaj Gönder" </input>
+                    </div> 
 
-                    </ul>
                 </div><!--/.nav-collapse -->
             </div>
         </div>

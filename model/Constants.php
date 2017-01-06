@@ -7,6 +7,6 @@
  */
 class Constants{
 
-    public static $serverUrl="http://localhost:8080/pinti"/*"http://pinti.16mb.com"*/;
+    public static $serverUrl="http://localhost/pinti"/*"http://pinti.16mb.com"*/;
     
 }

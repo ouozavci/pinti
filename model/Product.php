@@ -65,6 +65,12 @@ class Product
         $db = new DB_CONNECT();
         $mysqli = $db->connect();
         $result = mysqli_query($mysqli,"SELECT * FROM products P INNER JOIN category C ON P.category_id = C.id WHERE P.name LIKE '%{$keyword}%' OR C.name LIKE '%{$keyword}%'");
+    }
+    public static function updateStockAfterBuying($id){
+        $db = new DB_CONNECT();
+        $mysqli = $db->connect();
+        $result = mysqli_query($mysqli,"UPDATE products SET stock=stock-1 where id='$id'");
+
         return $result;
     }
 }
