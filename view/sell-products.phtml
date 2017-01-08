@@ -116,7 +116,7 @@ if(!$_SESSION['isLogged']){
                 seller_id: <? echo $_SESSION['id']?>,
                 image_url: image_url
             },function (data) {
-
+                window.location = "<?=Constants::$serverUrl?>";
             }
         )
     })

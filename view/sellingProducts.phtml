@@ -107,7 +107,7 @@ require_once "common/header.phtml"; ?>
             </div>
             <?php
             $products =  Product::getSellingProducts($_SESSION['id']);
-
+            if($products)
             while($result = mysqli_fetch_array($products)){
                 ?>
                 <table>

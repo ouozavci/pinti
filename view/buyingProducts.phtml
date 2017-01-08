@@ -106,8 +106,9 @@ require_once "common/header.phtml"; ?>
                 <h3>Satın Aldığım Ürünler</h3>
             </div>
             <?php
-           $products =  Product::getBuyingProducts($_SESSION['id']);
 
+           $products =  Product::getBuyingProducts($_SESSION['id']);
+            if($products)
             while($result = mysqli_fetch_array($products)){
             ?>
             <table>
