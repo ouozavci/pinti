@@ -121,7 +121,7 @@ require_once "common/header.phtml";
                     <td><h3>Genel Toplam</h3></td>
                     <td class="text-right">
                         <?php
-                            echo "<h3><strong>".$total_price." TL</strong></h3>";
+                            echo "<h3 id='totalPrice'><strong>".$total_price." TL</strong></h3>";
                         ?>
                     </td>
                 </tr>
@@ -151,6 +151,7 @@ require_once "common/header.phtml";
         var fiyat=$('#fiyat').val();
         var result=adet*fiyat;
         $('#adetFiyat').html("<strong>"+result+" TL</strong>");
+        $('#totalPrice').html("<strong>"+result+" TL</strong>");
     });
 </script>
 </body>

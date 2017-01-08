@@ -40,11 +40,13 @@ require_once "common/header.phtml"; ?>
                     <span class="visible-xs navbar-brand">Sidebar menu</span>
                 </div>
                 <div class="navbar-collapse collapse sidebar-navbar-collapse">
-                    <ul class="nav navbar-nav" id="sidenav01">
+                    <ul class="nav navbar-nav" id="sidenav01" style="padding-top: 20px">
 
+                        <?php if($user->img_url == NULL )  $user->img_url = "http://www.oldpotterybarn.co.uk/wp-content/uploads/2015/06/default-medium.png" ?>
                         <li>
                             <img src="<?=$user->img_url?>" width="100px" height="100px">
                         </li>
+
                         <li>
                             <a href="#" data-toggle="collapse" data-target="#toggleDemo1" data-parent="#sidenav01" class="collapsed">
                                 <span class="glyphicon glyphicon-shopping-cart"></span> E-Mail <span class="caret pull-right"></span>
@@ -79,7 +81,7 @@ require_once "common/header.phtml"; ?>
                     <?php  require_once __DIR__.'/../controller/session.php';
                     if($_SESSION['id'] == $user->id ) ?>
                     <div class="btn-group">
-                        <input type="button" class="btn btn-primary" onclick="window.location.href='update-profile?userid=<?=$id?>'"  value="Profili Düzenle" </input>
+                        <input type="button" class="btn btn-primary" onclick="window.location.href='update-profile?userid=<?=$id?>'"  value="Profili Düzenle" </input><br><br>
                     </div>
                     <div class="btn-group">
                         <input type="button" class="btn btn-primary" onclick="window.location.href='messaging?talkId=<?=$id?>'"   value="Mesaj Gönder" </input>
