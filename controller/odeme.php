@@ -17,8 +17,8 @@ if($_POST){
             setcookie('product['.$key.']', $key, time() - 86400);
 
         }
-
-        header("Location: /pinti"); /* Redirect browser */
+        require_once "../model/Constants.php";
+        header("Location:".Constants::$serverUrl); /* Redirect browser */
         exit();
     }
     else{

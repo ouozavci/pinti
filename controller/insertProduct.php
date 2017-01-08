@@ -10,6 +10,7 @@ require_once "../model/Product.php";
             $seller_id = $_POST['seller_id'];
             $image_url = $_POST['image_url'];
             Product::insertProduct($name,$price,$category_id,$seller_id,$image_url);
+
             echo "inserted";
         }
     }
