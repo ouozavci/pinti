@@ -20,7 +20,7 @@ require_once "common/header.phtml";
 <div class="container">
     <div class="row">
         <div class="col-sm-12 col-md-10 col-md-offset-1">
-            <table class="table table-hover">
+            <table class="table table-hover" id="table">
                 <thead>
                 <tr>
                     <th><?php
@@ -57,18 +57,21 @@ require_once "common/header.phtml";
                         $id=$urun;
                         $product = Product::getProductById($id);
                         if(!empty($product))
-                            $product = mysqli_fetch_array($product);
-                        $product_name=$product["name"];
-                        $product_id=$product["id"];
-                        $product_price=$product["price"];
-                        $product_img=$product["image_url"];
-                        $seller = new User();
-                        $seller->getCustomerById($product['seller_id']);
-                        $seller_fullname=$seller->firstName." ".$seller->lastName;
-                        $seller_id=$seller->id;
+                            $products = mysqli_fetch_array($product);
 
-                        $total_price+=$product_price;
-                        echo '<tr>
+
+                                $product_name = $products["name"];
+                                $product_id = $products["id"];
+                                $product_price = $products["price"];
+                                $product_img = $products["image_url"];
+                                $seller = new User();
+                                $seller->getCustomerById($products['seller_id']);
+                                $seller_fullname = $seller->firstName . " " . $seller->lastName;
+                                $seller_id = $seller->id;
+
+                                $total_price += $product_price;
+
+                        echo '<tr id="rowproduct">
                                 <td class="col-sm-8 col-md-6">
                                     <div class="media">
                                         <a class="thumbnail pull-left" href="show-product?id='.$product_id.'"> <img class="media-object" src="'.$product_img.'" style="width:180px; height:180px;"> </a>
@@ -84,12 +87,13 @@ require_once "common/header.phtml";
                                 <td class="col-sm-1 col-md-1 text-center"><strong>'.$product_price.' TL</strong></td>
                                 <input type="hidden" value="'.$product_price.'" id="fiyat">
                                 <td class="col-sm-1 col-md-1 text-center" id="adetFiyat"><strong>'.$product_price.' TL</strong></td>
+                                <input type="hidden" value="'.count($_COOKIE['product']).'" id="products">
                                 <td class="col-sm-1 col-md-1">
                                     <button type="button" class="btn btn-danger">
                                         <span class="glyphicon glyphicon-remove"></span> <a href="?cikart='.$product_id.'" style="color:white; text-decoration:none;">Sepetten Çıkar</a>
                                     </button>
                                 </td>
-                            </tr>';
+                            </tr>' ;
                     }
                 }
                 /* sepete ürün ekle */
@@ -132,7 +136,7 @@ require_once "common/header.phtml";
                     <td>
                         <button type="button" class="btn btn-default">
                             <span class="glyphicon glyphicon-shopping-cart"></span>
-                            <a href="<?php require_once "../model/Constants.php"; ?>" style="color:black; text-decoration:none; ">Alışverişe Devam Et</a>
+                            <a href="<?php require_once "../model/Constants.php";  ?>" style="color:black; text-decoration:none; ">Alışverişe Devam Et</a>
                         </button></td>
                     <td>
                         <button type="button" class="btn btn-success" onClick="location.href='adres'">
@@ -147,11 +151,13 @@ require_once "common/header.phtml";
 
 <script>
     $('body').on('change','#adet',function () {
-        var adet=$('#adet').val();
-        var fiyat=$('#fiyat').val();
-        var result=adet*fiyat;
-        $('#adetFiyat').html("<strong>"+result+" TL</strong>");
-        $('#totalPrice').html("<strong>"+result+" TL</strong>");
+                var numrows =  $('#products').val();
+                var result=0;
+                var adet = $('#adet').val();
+                var fiyat = $('#fiyat').val();
+                result += adet * fiyat;
+                $('#adetFiyat').html("<strong>" + result + " TL</strong>");
+                $('#totalPrice').html("<strong>" + result + " TL</strong>");
     });
 </script>
 </body>

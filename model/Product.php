@@ -74,4 +74,40 @@ class Product
 
         return $result;
     }
+    public static function insertUsersProducts($product_id,$user_id){
+        $db = new DB_CONNECT();
+        $mysqli = $db->connect();
+        $result = mysqli_query($mysqli,"INSERT INTO users_products (product_id,user_id)
+                                        VALUES ('$product_id','$user_id');");
+        return $result;
+    }
+    public static function getBuyingProducts($user_id){
+        $db = new DB_CONNECT();
+        $mysqli = $db->connect();
+        $result = mysqli_query($mysqli,"SELECT p.name,p.image_url FROM users_products as up ,products as p where up.product_id = p.id and up.user_id='$user_id'");
+        return $result;
+    }
+
+    public static function insertSellerProducts($product_id,$user_id){
+        $db = new DB_CONNECT();
+        $mysqli = $db->connect();
+        $result = mysqli_query($mysqli,"INSERT INTO sellers_products (product_id,seller_id) VALUES ('$product_id','$user_id');");
+        return $result;
+    }
+    public static function getSellingProducts($user_id){
+        $db = new DB_CONNECT();
+        $mysqli = $db->connect();
+        $result = mysqli_query($mysqli,"SELECT p.name,p.image_url FROM sellers_products as sp ,products as p where sp.product_id = p.id and p.seller_id='$user_id'");
+        return $result;
+    }
+    public static function getSellerId($product_id){
+        $db = new DB_CONNECT();
+        $mysqli = $db->connect();
+        $result = mysqli_query($mysqli,"SELECT seller_id FROM products where id='$product_id'");
+        if (mysqli_num_rows($result) > 0) {
+            $result = mysqli_fetch_array($result);
+            $id = $result["seller_id"];
+            return $id;
+        } else return NULL;
+    }
 }

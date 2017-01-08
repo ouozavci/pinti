@@ -25,4 +25,8 @@ RewriteRule ^messaging$ controller/messaging.php
 RewriteRule ^adres$ controller/adres.php
 RewriteRule ^odeme$ controller/odeme.php
 RewriteRule ^inbox$ controller/inbox.php
+RewriteRule ^buyingProducts$ controller/buyingProducts.php
+RewriteRule ^sellingProducts$ controller/sellingProducts.php
+
+
 
